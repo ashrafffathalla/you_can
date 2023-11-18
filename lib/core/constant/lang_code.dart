@@ -1,0 +1,11 @@
+String  langCode = '';
+String  ? makeToMakeOrder;
+String  ? deviceToken;
+String? userToken = "";
+String? phoneStorage;
+dynamic cardNameSaved;
+dynamic cardNumberSaved;
+dynamic securityNumberSaved;
+dynamic expiryMonthSaved;
+dynamic expiryYearSaved;
+bool isVisa = false;
