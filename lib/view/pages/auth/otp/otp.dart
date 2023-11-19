@@ -389,11 +389,6 @@ class _OTPState extends State<OTP> {
                     //     label: const Text("Change Languagh"))
                   ],
                 ),
-                CustomBackButton(ontap: () {
-                  HiveHelper().removeData("token").then((value) {
-                    Navigator.pop(context);
-                  });
-                }),
               ],
             ),
           );
