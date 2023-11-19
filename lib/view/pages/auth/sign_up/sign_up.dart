@@ -15,6 +15,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:you_can/view/widgets/defaultBtn.dart';
 import '../../../../core/validation/form_validator.dart';
 
 // import '../../../../data/model/country_model.dart';
@@ -28,21 +29,23 @@ class SignUp extends StatefulWidget {
   State<SignUp> createState() => _SignUpState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
+  late TabController _tabController;
   late TextEditingController userNameController;
-
   late TextEditingController passwordController;
-
   late TextEditingController confirmPasswordController;
-
   late TextEditingController phoneController;
   late TextEditingController licenseIdController;
-
   late TextEditingController emailController;
   bool isAgreeTerms = false;
   final _formKey = GlobalKey<FormState>();
 
-  // CountryModel? countryModel;
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
   @override
   void initState() {
     super.initState();
@@ -52,6 +55,12 @@ class _SignUpState extends State<SignUp> {
     phoneController = TextEditingController();
     emailController = TextEditingController();
     licenseIdController = TextEditingController();
+    _tabController = TabController(length: 2, vsync: this);
+    _tabController.addListener(_handleTabSelection);
+  }
+
+  void _handleTabSelection() {
+    setState(() {});
   }
 
   @override
@@ -204,34 +213,38 @@ class _SignUpState extends State<SignUp> {
           var cubit = BlocProvider.of<AuthCubit>(context);
           return SingleChildScrollView(
             child: Padding(
-              padding:  EdgeInsets.symmetric(horizontal:size.width*0.05,vertical: size.height*0.07 ),
+              padding: EdgeInsets.symmetric(
+                  horizontal: size.width * 0.05, vertical: size.height * 0.07),
               child: Form(
                 key: _formKey,
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
                       SizedBox(
-                        height: size.height * 0.02,
+                        height: size.height * 0.03,
                       ),
-                      Text(
-                        local!.register.toString(),
-                        style: TextStyle(
-                          fontSize: 16.sp,
-                        ),
-                      ),
+                      SvgPicture.asset('assets/images/logo.svg'),
                       SizedBox(
                         height: 0.03.sh,
                       ),
                       Text(
-                        CheckLocal.isDirectionRTL(context)
-                            ? "املأ البيانات لانشاء حسابك "
-                            : "Complete All Fields",
+                        local!.createEmailAndPassword.toString(),
                         style: TextStyle(
-                            fontSize: 20.sp, fontWeight: FontWeight.w700),
+                            fontSize: 24.sp, fontWeight: FontWeight.w700),
+                      ),
+                      Text(
+                        local.ContinueyourLearningJourney.toString(),
+                        style: TextStyle(
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w500,
+                            color: Color(0xff484848)),
                       ),
                       SizedBox(
-                        height: 0.03.sh,
+                        height: 0.04.sh,
                       ),
+
+                      ///-----------------------CustomTextForm--------------
+                      BeforTextForm(local.fullName.toString()),
                       CustomTextFeild(
                         controller: userNameController,
                         type: TextInputType.name,
@@ -240,10 +253,10 @@ class _SignUpState extends State<SignUp> {
                         validat: (value) =>
                             FormValidator.nameValidate(context, value),
                       ),
-
                       SizedBox(
                         height: SizeConfig.defaultSize! * 2,
                       ),
+                      BeforTextForm(local.phoneNumber.toString()),
                       CustomTextFeild(
                         inputFormatters: [
                           LengthLimitingTextInputFormatter(11),
@@ -256,29 +269,62 @@ class _SignUpState extends State<SignUp> {
                         pIcon: LineAwesomeIcons.mobile_phone,
                         validat: (value) =>
                             FormValidator.phoneValidate(context, value),
-                        // preText: CheckLocal.isDirectionRTL(context)
-                        //     ? '|  20 +'
-                        //     : ' + 20 | ',
-
-                        // sIcon: Padding(
-                        //   padding: EdgeInsets.only(top: 15.sp,bottom: 15.sp,),
-                        //   child: SvgPicture.asset('assets/images/ksa.svg',),
-                        // ),
                       ),
                       SizedBox(
                         height: SizeConfig.defaultSize! * 2,
                       ),
-                      CustomTextFeild(
-                        controller: emailController,
-                        type: TextInputType.emailAddress,
-                        label: local.emailAddress!,
-                        pIcon: LineAwesomeIcons.envelope,
-                        validat: (value) =>
-                            FormValidator.emailValidate(context, value),
+                      BeforTextForm('Gander'.toString()),
+                      SizedBox(
+                        height: 50.h,
+                        child: Column(
+                          children: [
+                            Container(
+                              width: 343.w,
+                              height: 42.h,
+                              decoration: BoxDecoration(
+                                color: Color(0xff767680).withOpacity(0.2),
+                                borderRadius: BorderRadius.circular(8.sp),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(vertical: 5.h),
+                                child: TabBar(
+                                  controller: _tabController,
+                                  indicatorColor: Colors.transparent,
+                                  padding: EdgeInsets.zero,
+                                  indicatorWeight: 1,
+                                  labelColor: Colors.black,
+                                  tabs: [
+                                    Container(
+                                        width: size.width,
+                                        decoration: BoxDecoration(
+                                            color: _tabController.index == 0
+                                                ? Colors.white
+                                                : Colors.transparent,
+                                            borderRadius:
+                                                BorderRadius.circular(8)),
+                                        child: Tab(
+                                          text: 'Male',
+                                        )),
+                                    Container(
+                                        width: size.width,
+                                        decoration: BoxDecoration(
+                                            color: _tabController.index == 1
+                                                ? Colors.white
+                                                : Colors.transparent,
+                                            borderRadius:
+                                                BorderRadius.circular(8)),
+                                        child: Tab(text: 'Female')),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                       SizedBox(
-                        height: SizeConfig.defaultSize! * 2,
+                        height: SizeConfig.defaultSize! * 1,
                       ),
+                      BeforTextForm(local.password.toString()),
                       CustomTextFeild(
                         controller: passwordController,
                         type: TextInputType.visiblePassword,
@@ -290,6 +336,7 @@ class _SignUpState extends State<SignUp> {
                       SizedBox(
                         height: SizeConfig.defaultSize! * 2,
                       ),
+                      BeforTextForm(local.password.toString()),
                       CustomTextFeild(
                         controller: confirmPasswordController,
                         type: TextInputType.visiblePassword,
@@ -310,7 +357,9 @@ class _SignUpState extends State<SignUp> {
                             ? SizeConfig.defaultSize! * 1
                             : SizeConfig.defaultSize! * .5,
                       ),
-                      Row(
+
+                      ///------------------Agree Terms
+                      /*Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Theme(
@@ -349,48 +398,29 @@ class _SignUpState extends State<SignUp> {
                             ? SizeConfig.defaultSize! * 1
                             : SizeConfig.defaultSize! * 0.5,
                       ),
+                      */
                       state is AuthLoading
                           ? const Center(
                               child: CircularProgressIndicator.adaptive(),
                             )
-                          : SizedBox(
-                              width: SizeConfig.defaultSize! * 35,
-                              child: ElevatedButton(
-                                style: ButtonStyle(
-                                    shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  // side: BorderSide(color: Colors.red)
-                                ))),
-                                onPressed: () async {
-                                  if (_formKey.currentState!.validate() &&
-                                      isAgreeTerms == true) {
-                                    await cubit.signUp(
-                                      name: userNameController.text,
-                                      email: emailController.text,
-                                      phone: phoneController.text,
-                                      password: passwordController.text,
-                                      licenseID: licenseIdController.text,
-                                      country: 1,
-                                      // country: countryModel!.id
-                                    );
-
-                                    // BlocProvider.of<LanguageCubit>(context)
-                                    //     .selectEngLanguage();
-                                  }
-                                  // Navigator.push(
-                                  //   context,
-                                  //   MaterialPageRoute(builder: (context) => OnBoarding()),
+                          : DefaultAppButton(
+                              onTap: () {
+                                if (_formKey.currentState!.validate() &&
+                                    isAgreeTerms == true) {
+                                  // await cubit.signUp(
+                                  //   name: userNameController.text,
+                                  //   email: emailController.text,
+                                  //   phone: phoneController.text,
+                                  //   password: passwordController.text,
+                                  //   licenseID: licenseIdController.text,
+                                  //   country: 1,
+                                  //   // country: countryModel!.id
                                   // );
-                                },
-                                child: Text(
-                                  local.register!,
-                                  style: TextStyle(
-                                      fontSize: 18.sp, color: Colors.white),
-                                ),
-                              ),
-                            ),
+                                }
+                              },
+                              height: 51.h,
+                              width: size.width,
+                              btnTitle: local.createEmailAndPassword),
                       SizedBox(height: 50.sp),
                       // SizedBox(
                       //   height: SizeConfig.defaultSize! * 0.05,
@@ -405,4 +435,19 @@ class _SignUpState extends State<SignUp> {
       ),
     );
   }
+
+  Widget BeforTextForm(title) => Column(
+        children: [
+          Row(
+            children: [
+              Text(title.toString(),
+                  style:
+                      TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600)),
+            ],
+          ),
+          SizedBox(
+            height: 5.h,
+          ),
+        ],
+      );
 }

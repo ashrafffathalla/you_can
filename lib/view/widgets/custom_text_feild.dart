@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:you_can/core/localization/check_local.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -73,20 +74,16 @@ class _CustomTextFeildState extends State<CustomTextFeild> {
       maxLength: widget.maxlenth,
       obscureText: widget.type == TextInputType.visiblePassword ? !isShow : isShow,
       keyboardType: widget.type,
-      style: TextStyle(fontSize: 20.sp),
+      style: TextStyle(fontSize: 16.sp),
       decoration: InputDecoration(
-        hintTextDirection: TextDirection.rtl,
-        counterText: "",
-        contentPadding:  EdgeInsets.all(8.0.sp),
-        // focusedBorder: OutlineInputBorder(
-        //     borderRadius: BorderRadius.circular(0.sp),
-        //     borderSide:const BorderSide(
-        //         color: Color(0xffFFD451),
-        //         width: 1.0)
-        // ),
-        enabledBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey),
+        border: InputBorder.none,
+        fillColor: Color(0XFFFFFFFF),
+        hintTextDirection: CheckLocal.isDirectionRTL(context)?TextDirection.rtl:TextDirection.ltr,
+        hintStyle: TextStyle(
+            color: Color(0xff989898),
+          fontSize: 16.sp,
         ),
+        contentPadding:  EdgeInsets.symmetric(vertical: 10.h,horizontal: 13.w),
         errorBorder: OutlineInputBorder(
             // borderRadius: BorderRadius.circular(50),
             borderSide: BorderSide(
@@ -99,29 +96,22 @@ class _CustomTextFeildState extends State<CustomTextFeild> {
                 width: 1.0)),
 
         filled: true,
-        label: Text(
-            widget.label,
-          style: TextStyle(
-            fontSize: widget.waletScreen==true?13.sp:14.sp,
-            fontWeight: FontWeight.w400
-
-          ),
-        ),
-
-        // prefixText: widget.preText.toString(),
-       // prefixText: CheckLocal.isDirectionRTL(context)?'':widget.type == TextInputType.phone?widget.preText.toString():'',
-       //  suffixText: CheckLocal.isDirectionRTL(context)?widget.type == TextInputType.phone?widget.preText.toString():'':null,
+        // label: Text(
+        //     widget.label,
+        //   style: TextStyle(
+        //     fontSize: widget.waletScreen==true?13.sp:14.sp,
+        //     fontWeight: FontWeight.w400
+        //
+        //   ),
+        // ),
+        // labelStyle: Theme.of(context).textTheme.bodyMedium,
         suffixStyle: TextStyle(fontWeight: FontWeight.bold,fontSize: 16.sp,),
         prefixStyle: TextStyle(fontWeight: FontWeight.bold,fontSize: 16.sp,),
-
-
-
-        labelStyle: Theme.of(context).textTheme.bodyMedium,
-        hintText: widget.hint,
-        prefixIcon: Icon(
-          widget.pIcon,
-          color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
-        ),
+        hintText: widget.label,
+        // prefixIcon: Icon(
+        //   widget.pIcon,
+        //   color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
+        // ),
         suffixIcon: widget.type == TextInputType.visiblePassword
             ? IconButton(
                 onPressed: changeVisibility,

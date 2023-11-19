@@ -11,6 +11,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:you_can/view/widgets/defaultBtn.dart';
 import '../../../../core/validation/form_validator.dart';
 import '../../../../language/locale.dart';
 import '../../../../provider/auth_cubit/auth_cubit.dart';
@@ -28,6 +29,7 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   late TextEditingController phoneController;
+  late TextEditingController CodeController;
   late TextEditingController passwordController;
 
   final _formKey = GlobalKey<FormState>();
@@ -36,7 +38,7 @@ class _LoginState extends State<Login> {
   void initState() {
     passwordController = TextEditingController();
     phoneController = TextEditingController();
-    // BlocProvider.of<AuthCubit>(context).listCountry.clear();
+    CodeController = TextEditingController();
     super.initState();
   }
 
@@ -50,24 +52,61 @@ class _LoginState extends State<Login> {
           key: _formKey,
           child: Column(
             children: [
+              Row(
+                children: [
+                  Text(local!.phoneNumber.toString(),
+                      style: TextStyle(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w600
+                  )),
+                ],
+              ),
+              SizedBox(height: 5.h,),
               CustomTextFeild(
                 controller: phoneController,
                 type: TextInputType.emailAddress,
                 label: local!.phoneNumber.toString(),
-                pIcon: LineAwesomeIcons.mobile_phone,
                 validat: (value) => FormValidator.phoneValidate(context, value),
               ),
               SizedBox(height: SizeConfig.defaultSize! * 2,),
+              Row(
+                children: [
+                  Text('Code',
+                      style: TextStyle(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w600
+                      )),
+                ],
+              ),
+              SizedBox(height: 5.h,),
+              CustomTextFeild(
+                controller: CodeController,
+                type: TextInputType.emailAddress,
+                label: 'Code',
+                validat: (value) => FormValidator.phoneValidate(context, value),
+              ),
+              SizedBox(height: SizeConfig.defaultSize! * 2,),
+              Row(
+                children: [
+                  Text(local.password.toString(),
+                      style: TextStyle(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w600
+                      )),
+                ],
+              ),
+              SizedBox(height: 5.h,),
               CustomTextFeild(
                 controller: passwordController,
                 type: TextInputType.visiblePassword,
                 label: local.password.toString(),
-                pIcon: LineAwesomeIcons.lock,
                 validat: (value) =>
                     FormValidator.passwordValidate(context, value),
               ),
+              ///----------------------Forget PassWord -------------
+              SizedBox(height: 5.h,),
               Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Padding(
                     padding: EdgeInsets.only(left: 5.sp),
@@ -83,9 +122,10 @@ class _LoginState extends State<Login> {
                         local.forgetPassword.toString(),
                         textAlign: TextAlign.start,
                         style: TextStyle(
+                          decoration: TextDecoration.underline,
                             fontSize: 16.sp,
                             fontWeight: FontWeight.w500,
-                             color:const Color(0xffF96817).withOpacity(0.6),),
+                             color:const Color(0xff006FF1)),
                       ),
                     ),
                   ),
@@ -149,30 +189,16 @@ class _LoginState extends State<Login> {
                       child: CircularProgressIndicator.adaptive(),
                     );
                   }
-                  return SizedBox(
-                    width: SizeConfig.defaultSize! * 35,
-                    child: ElevatedButton(
-                        style: ButtonStyle(
-                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    // side: BorderSide(color: Colors.red)
-                                )
-                            )),
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            // BlocProvider.of<AuthCubit>(context).login(
-                            //     email: phoneController.text,
-                            //     password: passwordController.text);
-                            ///-----مسح مع API
-                            navigateTo(context, LayoutScreen());
-                          }
-                        },
-                        child: Text(local.signIn.toString(),style: TextStyle(
-                            fontSize: 18.sp,
-                          color: Colors.white
-                        ),)),
-                  );
+                  return DefaultAppButton(onTap: (){
+                    if (_formKey.currentState!.validate()) {
+                      // BlocProvider.of<AuthCubit>(context).login(
+                      //     email: phoneController.text,
+                      //     password: passwordController.text);
+                      ///-----مسح مع API
+                      navigateTo(context, LayoutScreen());
+                    }
+                  }, height: 51.h, width: MediaQuery.of(context).size.width, btnTitle: local.signIn);
+
                 },
               ),
               SizedBox(height: 0.03.sh,),

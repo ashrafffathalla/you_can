@@ -5,7 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:you_can/core/app_life_cycle_manager.dart';
 import 'package:you_can/language/locale.dart';
 import 'package:you_can/provider/auth_cubit/auth_cubit.dart';
-import 'package:you_can/view/pages/auth/welcomAuth.dart';
+import 'package:you_can/view/pages/auth/login/autth_view.dart';
+import 'package:you_can/view/pages/auth/welcomeScreen/welcomAuth.dart';
 import 'core/localization/language_cubit.dart';
 import 'core/style/style.dart';
 import 'data/local/hiva_helper.dart';
@@ -59,7 +60,7 @@ class MyApp extends StatelessWidget {
                 locale: locale,
                 theme: lightTheme(),
                 themeMode: ThemeMode.system,
-                home: WelcomeAuth(),
+                home: AuthView(),
                 debugShowCheckedModeBanner: false,
               );
             },

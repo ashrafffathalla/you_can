@@ -1,5 +1,6 @@
 import 'package:animation_wrappers/animations/faded_slide_animation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:you_can/core/localization/check_local.dart';
 import 'package:you_can/core/size_config/size_config.dart';
@@ -41,52 +42,54 @@ class _AuthViewState extends State<AuthView> {
     final local = AppLocalizations.of(context)!;
     final Size size = MediaQuery.of(context).size;
     return  Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
+     backgroundColor: Color(0xffF6F6F6),
       body: Padding(
         padding:  EdgeInsets.symmetric(horizontal:size.width*0.05,vertical: size.height*0.07 ),
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(height: size.height*0.02,),
-              Text(local.signIn.toString(),style: TextStyle(
-                fontSize: 16.sp,
-              ),),
+              SizedBox(height: size.height*0.03,),
+              SvgPicture.asset('assets/images/logo.svg'),
               SizedBox(height: 0.03.sh,),
-              Text(CheckLocal.isDirectionRTL(context)?"مرحبا بعودتك مرة اخري ":"Welcome Back Again",style: TextStyle(
-                fontSize: 20.sp,
+              Text(local.signIn.toString(),style: TextStyle(
+                fontSize: 24.sp,
                 fontWeight: FontWeight.w700
+              ),),
+              Text(local.ContinueyourLearningJourney.toString(),style: TextStyle(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w500,
+                color: Color(0xff484848)
               ),),
               SizedBox(height: 0.03.sh,),
               const Login(),
-              SizedBox(height: 0.03.sh,),
-              CustomMainBtn(ontap: (){},
-              iconButton: Padding(
-                padding:  EdgeInsets.only(right:size.width*0.03 ),
-                child: const FaIcon(FontAwesomeIcons.google,color: Colors.white,),
-              ),
-                textButton: CheckLocal.isDirectionRTL(context)?"سجل عبر جوجل":"Continue With Google",
-              ),
-              SizedBox(height: 0.02.sh,),
-              CustomMainBtn(ontap: (){},
-                iconButton: Padding(
-                  padding:  EdgeInsets.only(right:size.width*0.03 ),
-                  child: const FaIcon(FontAwesomeIcons.facebook,color: Colors.white,),
-                ),
-                textButton: CheckLocal.isDirectionRTL(context)?"سجل عبر فيسبوك":"Continue With Facebook",
-              ),
-              SizedBox(height: 0.025.sh,),
-              InkWell(
-                onTap: (){
-                  navigateTo(context,const SignUp());
-                },
-                child: Text(CheckLocal.isDirectionRTL(context)?"ليس لديك حساب ؟ انشئ حساب الآن":"Don't Have Account ? Create Account",
-                style: TextStyle(
-                  color:const Color(0xffF96817),
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w600
-                ),
-                ),
+
+              Row(
+                children: [
+                  InkWell(
+                    onTap: (){
+                      navigateTo(context,const SignUp());
+                    },
+                    child: Row(
+                      children: [
+                        Text(CheckLocal.isDirectionRTL(context)?"ليس لديك حساب ؟ انشئ حساب الآن":"Don't Have Account ?",
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500
+                        ),
+                        ),
+                        Text(CheckLocal.isDirectionRTL(context)?"انشئ حساب":"Sign Up",
+                          style: TextStyle(
+                            decoration: TextDecoration.underline,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w500,
+                            color: Color(0xff006FF1)
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

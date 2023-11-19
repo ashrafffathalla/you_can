@@ -460,8 +460,8 @@ class AppLocalizations {
     return _localizedValues[locale.languageCode]!['openLocation'];
   }
 
-  String? get chooseCar {
-    return _localizedValues[locale.languageCode]!['chooseCar'];
+  String? get chooseRole {
+    return _localizedValues[locale.languageCode]!['chooseRole'];
   }
   String? get avilable {
     return _localizedValues[locale.languageCode]!['avilable'];
@@ -550,8 +550,8 @@ class AppLocalizations {
     return _localizedValues[locale.languageCode]!['noCarsInBranch'];
   }
 
-  String? get noCarsBooking1 {
-    return _localizedValues[locale.languageCode]!['noCarsBooking1'];
+  String? get student {
+    return _localizedValues[locale.languageCode]!['student'];
   }
 
   String? get noCarsBookings => _localizedValues[locale.languageCode]!['noCarsBookings'];
@@ -872,8 +872,10 @@ class AppLocalizations {
     return _localizedValues[locale.languageCode]!['addNewLocation'];
   }
 
-  String? get selectAddressType {
-    return _localizedValues[locale.languageCode]!['selectAddressType'];
+  String? get selectAccountType {
+    return _localizedValues[locale.languageCode]!['selectAccountType'];
+  }String? get ContinueyourLearningJourney {
+    return _localizedValues[locale.languageCode]!['ContinueyourLearningJourney'];
   }
 
   String? get enterAddressDetails {
