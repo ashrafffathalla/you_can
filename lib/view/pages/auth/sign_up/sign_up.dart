@@ -37,7 +37,7 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
   late TextEditingController dateController;
   bool isAgreeTerms = false;
   final _formKey = GlobalKey<FormState>();
-  String _selectedDate = '0000-00-00 00:00:00.000';
+  String _selectedDate = '2000-01-01 12:34:56.000';
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
