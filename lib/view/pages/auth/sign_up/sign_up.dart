@@ -3,15 +3,12 @@ import 'package:you_can/core/localization/check_local.dart';
 import 'package:you_can/core/size_config/size_config.dart';
 import 'package:you_can/provider/auth_cubit/auth_cubit.dart';
 import 'package:you_can/shared/shared_commponents/commponents.dart';
-import 'package:you_can/view/pages/auth/login/autth_view.dart';
-import 'package:you_can/view/pages/auth/otp/otp.dart';
-
-// import 'package:you_can/view/pages/menu/about_us/privacy_policy/privacy_policy.dart';
+import 'package:intl/intl.dart';
+import 'package:you_can/view/pages/auth/sign_up/success_create_Account.dart';
 import 'package:you_can/view/widgets/custom_text_feild.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
@@ -37,8 +34,25 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
   late TextEditingController phoneController;
   late TextEditingController licenseIdController;
   late TextEditingController emailController;
+  late TextEditingController dateController;
   bool isAgreeTerms = false;
   final _formKey = GlobalKey<FormState>();
+  String _selectedDate = '0000-00-00 00:00:00.000';
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime(2030),
+    );
+
+    if (picked != null) {
+      setState(() {
+        _selectedDate = picked.toString(); // Store the selected date
+      });
+    }
+  }
 
   @override
   void dispose() {
@@ -50,6 +64,7 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     userNameController = TextEditingController();
+    dateController = TextEditingController();
     passwordController = TextEditingController();
     confirmPasswordController = TextEditingController();
     phoneController = TextEditingController();
@@ -67,6 +82,7 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     final local = AppLocalizations.of(context);
+
     // BlocProvider.of<AuthCubit>(context).getCountry();
     return Scaffold(
       body: BlocConsumer<AuthCubit, AuthState>(
@@ -324,6 +340,39 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
                       SizedBox(
                         height: SizeConfig.defaultSize! * 1,
                       ),
+
+                      ///--------------------
+                      BeforTextForm(local.datetime.toString()),
+                  TextFormField(
+                    onTap: () {
+                      _selectDate(context);
+                    },
+                    readOnly: true,
+                    controller: TextEditingController(text: DateFormat('yyyy-MM-dd').format(DateTime.parse(_selectedDate))),
+                    decoration: InputDecoration(
+                      contentPadding:  EdgeInsets.symmetric(vertical: 10.h,horizontal: 13.w),
+                      errorBorder: OutlineInputBorder(
+                        // borderRadius: BorderRadius.circular(50),
+                          borderSide: BorderSide(
+                              color: Theme.of(context).colorScheme.error.withOpacity(0.3),
+                              width: 1.0)),
+                      focusedErrorBorder: OutlineInputBorder(
+                        // borderRadius: BorderRadius.circular(50.sp),
+                          borderSide: BorderSide(
+                              color: Theme.of(context).colorScheme.error.withOpacity(0.3),
+                              width: 1.0)),
+                      border: InputBorder.none,
+                      fillColor: Color(0XFFFFFFFF),
+                      filled: true,
+                      labelText: 'Pick a date',
+                      suffixIcon: Icon(Icons.calendar_today),
+                    ),
+                  ),
+
+                      ///--------------------
+                      SizedBox(
+                        height: SizeConfig.defaultSize! * 1,
+                      ),
                       BeforTextForm(local.password.toString()),
                       CustomTextFeild(
                         controller: passwordController,
@@ -407,6 +456,7 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
                               onTap: () {
                                 if (_formKey.currentState!.validate() &&
                                     isAgreeTerms == true) {
+                                  navigateTo(context, SuccessCreateAccount());
                                   // await cubit.signUp(
                                   //   name: userNameController.text,
                                   //   email: emailController.text,

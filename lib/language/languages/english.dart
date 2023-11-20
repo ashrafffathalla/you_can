@@ -183,6 +183,8 @@ Map<String, String> english() {
     "selectMethodDescription":
         "no payment method selected please select a method",
     "signIn": "Login",
+    'accountVerified': 'Account Verified',
+    'successfullyVerified': 'You have successfully verified your account',
     "ContinueyourLearningJourney": "Continue your Learning Journey",
     'uploadLicenseFace': " Upload License Face",
     'uploadLicenseBack': " Upload License Back",
@@ -314,7 +316,7 @@ Map<String, String> english() {
     'address': 'Address',
     'location': 'Location',
     'days': 'Days',
-    'done': 'Done',
+    'done': 'Get Started',
     'time': 'Time',
     'addNewAddress': 'Add New Address',
     'saved': 'Saved',

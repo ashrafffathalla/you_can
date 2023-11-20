@@ -287,6 +287,9 @@ Map<String, String> arabic() {
     'savedAddresses': 'عناوين المحفوظة',
     'addNewLocation': 'إضافة موقع جديد',
     'selectAccountType': 'أختر',
+    'accountVerified': 'تم تأكيد حسابك',
+    'successfullyVerified': 'لقد قمت بالتحقق من حسابك بنجاح',
+
     'ContinueyourLearningJourney': 'تابع رحلتك التعليمية',
     'enterAddressDetails': 'أدخل تفاصيل العناوين',
     'myOrders': 'طلباتي',

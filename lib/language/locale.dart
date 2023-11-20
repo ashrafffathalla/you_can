@@ -867,6 +867,12 @@ class AppLocalizations {
   String? get savedAddresses {
     return _localizedValues[locale.languageCode]!['savedAddresses'];
   }
+  String? get accountVerified {
+    return _localizedValues[locale.languageCode]!['accountVerified'];
+  }
+  String? get successfullyVerified {
+    return _localizedValues[locale.languageCode]!['successfullyVerified'];
+  }
 
   String? get addNewLocation {
     return _localizedValues[locale.languageCode]!['addNewLocation'];

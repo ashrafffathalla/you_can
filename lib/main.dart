@@ -6,12 +6,16 @@ import 'package:you_can/core/app_life_cycle_manager.dart';
 import 'package:you_can/language/locale.dart';
 import 'package:you_can/provider/auth_cubit/auth_cubit.dart';
 import 'package:you_can/view/pages/auth/login/autth_view.dart';
+import 'package:you_can/view/pages/auth/sign_up/sign_up.dart';
 import 'package:you_can/view/pages/auth/welcomeScreen/welcomAuth.dart';
 import 'core/localization/language_cubit.dart';
+import 'core/size_config/size_config.dart';
 import 'core/style/style.dart';
 import 'data/local/hiva_helper.dart';
 import 'injection_container.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+
+import 'view/pages/auth/sign_up/success_create_Account.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -36,6 +40,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return ScreenUtilInit(
       designSize: const Size(360, 690),
       minTextAdapt: true,
@@ -60,7 +65,7 @@ class MyApp extends StatelessWidget {
                 locale: locale,
                 theme: lightTheme(),
                 themeMode: ThemeMode.system,
-                home: AuthView(),
+                home: SignUp(),
                 debugShowCheckedModeBanner: false,
               );
             },
