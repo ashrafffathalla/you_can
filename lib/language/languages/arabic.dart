@@ -58,7 +58,7 @@ Map<String, String> arabic() {
     "pleaseEnterValidCredit": "برجاء ادخال بطاقة صالحة",
     'pleaseEnterPassword': 'برجاء ادخال كلمة المرور',
     "passwordNotMatching": "كلمة المرور غير متطابقة",
-    'pleaseEnterNumberMinimum': 'يجب ان يكون رقم الهاتف 8 ارقام',
+    'pleaseEnterNumberMinimum': 'يجب ان يكون رقم الهاتف 11 رقم',
     'pleaseEnterPhoneNumber': 'برجاء ادخال رقم الهاتف الجوال',
     'enterValidEmail': 'برجاء ادخال بريد الكتروني صالح',
     "pleaseEnterEmail": "برجاء ادخال البرريد",

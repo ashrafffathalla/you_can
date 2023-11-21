@@ -58,14 +58,37 @@ class Validate {
       return locale!.pleaseEnterPhoneNumber;
     }
 
-    if (value.length < 8) {
+    if (value.length < 11) {
       return locale!.pleaseEnterNumberMinimum;
     }
-    if (value.startsWith('05')) {
-      return CheckLocal.isDirectionRTL(context)
-          ? 'برجاء عدم ادخال 05 برقم الهاتف'
-          : "Don't Write 05 In The Number";
+    // if (value.startsWith('05')) {
+    //   return CheckLocal.isDirectionRTL(context)
+    //       ? 'برجاء عدم ادخال 05 برقم الهاتف'
+    //       : "Don't Write 05 In The Number";
+    // }
+
+    return null;
+  }
+  static String? codeValidate(BuildContext context, String? value) {
+    final locale = AppLocalizations.of(context);
+
+    if (value == null) {
+      return null;
     }
+    if (value.isEmpty) {
+      return locale!.pleaseEnterPhoneNumber;
+    }
+
+    if (value.length < 5) {
+        return CheckLocal.isDirectionRTL(context)
+            ? 'برجاء عدم ادخال الكودأرقام'
+            : "Please Enter Your Code 6 digits";
+    }
+    // if (value.startsWith('05')) {
+    //   return CheckLocal.isDirectionRTL(context)
+    //       ? 'برجاء عدم ادخال 05 برقم الهاتف'
+    //       : "Don't Write 05 In The Number";
+    // }
 
     return null;
   }

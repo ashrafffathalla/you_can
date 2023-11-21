@@ -50,6 +50,14 @@ static String? passwordConfirmValidate(
       return phoneValidator;
     }
   }
+  static String? codeValidate(BuildContext context, String? value) {
+    final phoneValidator = Validate.codeValidate(context, value);
+    if (phoneValidator == null) {
+      return null;
+    } else {
+      return phoneValidator;
+    }
+  }
 
   static String? licenceValidate(BuildContext context, String? value) {
     final phoneValidator = Validate.validateLicenceNumber(context, value);

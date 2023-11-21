@@ -66,7 +66,7 @@ Map<String, String> english() {
     "enterValidCVV": "Please Enter Valid CVV",
     'pleaseEnterPassword': 'Please Enter Password',
     "passwordNotMatching": "Password Are Not Matching",
-    'pleaseEnterNumberMinimum': 'phone number should be 8 digits',
+    'pleaseEnterNumberMinimum': 'phone number should be 11 digits',
     'pleaseEnterPhoneNumber': 'Please Enter Phone Number',
     "doneEditProfile": "Done Edit Profile",
     'enterValidEmail': 'Enter Valid Email',

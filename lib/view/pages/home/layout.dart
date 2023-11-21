@@ -49,10 +49,10 @@ class _LayoutScreenState extends State<LayoutScreen> {
           clipBehavior: Clip.none,
           child:  Padding(
             padding:  EdgeInsets.only( top: size.height * 0.018,),
-            child:const Icon(Icons.home_outlined,size: 25,),
+            child:const Icon(Icons.home,size: 25,),
           ),
         ),
-        title: "الرئيسيه",
+        title:locale!.home.toString(),
         textStyle: Theme.of(context)
             .textTheme
             .bodyMedium!

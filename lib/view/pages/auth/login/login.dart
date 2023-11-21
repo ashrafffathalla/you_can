@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:you_can/core/localization/check_local.dart';
 import 'package:you_can/core/size_config/size_config.dart';
 import 'package:you_can/data/local/hiva_helper.dart';
@@ -64,9 +65,12 @@ class _LoginState extends State<Login> {
               SizedBox(height: 5.h,),
               CustomTextFeild(
                 controller: phoneController,
-                type: TextInputType.emailAddress,
-                label: local!.phoneNumber.toString(),
+                type: TextInputType.number,
+                label: local.phoneNumber.toString(),
                 validat: (value) => FormValidator.phoneValidate(context, value),
+                inputFormatters: [
+                  LengthLimitingTextInputFormatter(11),
+                ],
               ),
               SizedBox(height: SizeConfig.defaultSize! * 2,),
               Row(
@@ -81,9 +85,9 @@ class _LoginState extends State<Login> {
               SizedBox(height: 5.h,),
               CustomTextFeild(
                 controller: CodeController,
-                type: TextInputType.emailAddress,
+                type: TextInputType.number,
                 label: 'Code',
-                validat: (value) => FormValidator.phoneValidate(context, value),
+                validat: (value) => FormValidator.codeValidate(context, value),
               ),
               SizedBox(height: SizeConfig.defaultSize! * 2,),
               Row(

@@ -8,6 +8,7 @@ import 'package:you_can/provider/auth_cubit/auth_cubit.dart';
 import 'package:you_can/view/pages/auth/login/autth_view.dart';
 import 'package:you_can/view/pages/auth/sign_up/sign_up.dart';
 import 'package:you_can/view/pages/auth/welcomeScreen/welcomAuth.dart';
+import 'package:you_can/view/pages/splash_screen/splash_screen.dart';
 import 'core/localization/language_cubit.dart';
 import 'core/size_config/size_config.dart';
 import 'core/style/style.dart';
@@ -65,7 +66,7 @@ class MyApp extends StatelessWidget {
                 locale: locale,
                 theme: lightTheme(),
                 themeMode: ThemeMode.system,
-                home: SignUp(),
+                home: AuthView(),
                 debugShowCheckedModeBanner: false,
               );
             },
