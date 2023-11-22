@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:you_can/language/locale.dart';
+import 'package:you_can/shared/shared_commponents/commponents.dart';
+import 'package:you_can/view/pages/home/layout.dart';
 import 'package:you_can/view/widgets/defultOutLineBtn.dart';
 
 class SuccessCreateAccount extends StatelessWidget {
@@ -48,7 +50,9 @@ class SuccessCreateAccount extends StatelessWidget {
               SizedBox(
                 height: 0.05.sh,
               ),
-              DefaultAppOutLineButton(onTap: (){}, height: 51.h, width: size.width, btnTitle: local.done.toString())
+              DefaultAppOutLineButton(onTap: (){
+                navigateTo(context, LayoutScreen());
+              }, height: 51.h, width: size.width, btnTitle: local.done.toString())
             ],
           ),
         ),

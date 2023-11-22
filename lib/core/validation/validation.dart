@@ -76,13 +76,15 @@ class Validate {
       return null;
     }
     if (value.isEmpty) {
-      return locale!.pleaseEnterPhoneNumber;
+      return CheckLocal.isDirectionRTL(context)
+          ? 'برجاء عدم ادخال الكود'
+          : "Please Enter Your Code digits";
     }
 
     if (value.length < 5) {
         return CheckLocal.isDirectionRTL(context)
-            ? 'برجاء عدم ادخال الكودأرقام'
-            : "Please Enter Your Code 6 digits";
+            ? 'برجاء عدم ادخال الكود'
+            : "Please Enter Your Code digits";
     }
     // if (value.startsWith('05')) {
     //   return CheckLocal.isDirectionRTL(context)

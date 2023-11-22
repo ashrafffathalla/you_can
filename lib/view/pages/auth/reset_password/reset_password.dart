@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:you_can/shared/shared_commponents/commponents.dart';
+import 'package:you_can/view/pages/home/layout.dart';
+import 'package:you_can/view/widgets/defaultBtn.dart';
 import 'dart:math' as math;
 import '../../../../core/localization/check_local.dart';
 import '../../../../core/validation/form_validator.dart';
@@ -47,7 +50,6 @@ class _ResetPasswordState extends State<ResetPassword> {
         listener: (context, state) {
           if (state is AuthError) {
             HiveHelper().removeData("token").then((value) {
-
               Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute<void>(
@@ -62,7 +64,7 @@ class _ResetPasswordState extends State<ResetPassword> {
               Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute<void>(
-                      builder: (BuildContext context) => const ResetDone(),
+                    builder: (BuildContext context) => const ResetDone(),
                   ),
                   (route) => false);
             });
@@ -76,11 +78,18 @@ class _ResetPasswordState extends State<ResetPassword> {
                   key: _formKey,
                   child: Column(
                     children: [
-                      SizedBox(height: size.height*0.08,),
-                      Text(local!.newPassword.toString(),style: TextStyle(
-                        fontSize: 16.sp,
-                      ),),
-                      SizedBox(height: 0.04.sh,),
+                      SizedBox(
+                        height: size.height * 0.08,
+                      ),
+                      Text(
+                        local!.newPassword.toString(),
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 0.04.sh,
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -118,11 +127,11 @@ class _ResetPasswordState extends State<ResetPassword> {
                                           height:
                                               SizeConfig.defaultSize! * 0.22),
                               children: <TextSpan>[
-                                TextSpan(
-                                    text: local.resetPassword,
-                                    style:  TextStyle(
-                                        fontSize: 16.sp,
-                                        fontWeight: FontWeight.normal)),
+                                // TextSpan(
+                                //     text: local.to,
+                                //     style:  TextStyle(
+                                //         fontSize: 16.sp,
+                                //         fontWeight: FontWeight.normal)),
                               ],
                             ),
                           )
@@ -132,7 +141,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                         height: SizeConfig.defaultSize! * 3.5,
                       ),
                       Padding(
-                        padding:  EdgeInsets.symmetric(
+                        padding: EdgeInsets.symmetric(
                             horizontal: 20.sp, vertical: 10.sp),
                         child: CustomTextFeild(
                           controller: passwordController,
@@ -144,7 +153,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                         ),
                       ),
                       Padding(
-                        padding:  EdgeInsets.symmetric(
+                        padding: EdgeInsets.symmetric(
                             horizontal: 20.sp, vertical: 10.sp),
                         child: CustomTextFeild(
                           controller: confirmPasswordController,
@@ -159,27 +168,23 @@ class _ResetPasswordState extends State<ResetPassword> {
                       SizedBox(
                         height: SizeConfig.defaultSize! * 3.5,
                       ),
-                      SizedBox(
-                          width: SizeConfig.defaultSize! * 15,
-                          child: ElevatedButton(
-                              style: ButtonStyle(
-                                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                      RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8.0),
-                                        // side: BorderSide(color: Colors.red)
-                                      )
-                                  )),
-                              onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  // BlocProvider.of<AuthCubit>(context)
-                                  //     .changepass(
-                                  //         pass: passwordController.text);
-                                }
-                              },
-                              child: Text(local.reset!,style:const TextStyle(
-                                color: Colors.white,
-
-                              ),))),
+                      Padding(
+                        padding:  EdgeInsets.symmetric(horizontal: size.width*0.05),
+                        child: SizedBox(
+                            width: size.width,
+                            child: DefaultAppButton(
+                                onTap: (){
+                                  if (_formKey.currentState!.validate()) {
+                                    navigateAndFinish(context, LayoutScreen());
+                                    // BlocProvider.of<AuthCubit>(context)
+                                    //     .changepass(
+                                    //         pass: passwordController.text);
+                                  }
+                                },
+                                height: 51.h,
+                                width: size.width,
+                                btnTitle: local.reset)),
+                      ),
                     ],
                   ),
                 ),

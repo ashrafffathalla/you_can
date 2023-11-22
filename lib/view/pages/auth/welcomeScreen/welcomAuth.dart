@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:you_can/language/locale.dart';
 import 'package:you_can/shared/shared_commponents/commponents.dart';
+import 'package:you_can/view/pages/auth/login/autth_view.dart';
 import 'package:you_can/view/pages/auth/welcomeScreen/selectAccountType.dart';
 import 'package:you_can/view/widgets/defaultBtn.dart';
 import 'package:you_can/view/widgets/defultOutLineBtn.dart';
@@ -25,7 +26,9 @@ class WelcomeAuth extends StatelessWidget {
               navigateTo(context, SelectAccountType());
             }, height: 51.h, width: size.width, btnTitle: local!.createEmailAndPassword.toString()),
             SizedBox(height: size.height*0.03,),
-            DefaultAppOutLineButton(onTap: (){}, height: 51.h, width: size.width, btnTitle: local.signIn.toString())
+            DefaultAppOutLineButton(onTap: (){
+              navigateTo(context, AuthView());
+            }, height: 51.h, width: size.width, btnTitle: local.signIn.toString())
           ],
         ),
       ),

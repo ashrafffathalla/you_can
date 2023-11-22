@@ -51,11 +51,11 @@ static String? passwordConfirmValidate(
     }
   }
   static String? codeValidate(BuildContext context, String? value) {
-    final phoneValidator = Validate.codeValidate(context, value);
-    if (phoneValidator == null) {
+    final codeValidator = Validate.codeValidate(context, value);
+    if (codeValidator == null) {
       return null;
     } else {
-      return phoneValidator;
+      return codeValidator;
     }
   }
 

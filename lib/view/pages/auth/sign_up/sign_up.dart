@@ -340,7 +340,6 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
                       SizedBox(
                         height: SizeConfig.defaultSize! * 1,
                       ),
-
                       ///--------------------
                       BeforTextForm(local.datetime.toString()),
                   TextFormField(
@@ -365,10 +364,9 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
                       fillColor: Color(0XFFFFFFFF),
                       filled: true,
                       labelText: 'Pick a date',
-                      suffixIcon: Icon(Icons.calendar_today),
+                      suffixIcon: Icon(Icons.calendar_month),
                     ),
                   ),
-
                       ///--------------------
                       SizedBox(
                         height: SizeConfig.defaultSize! * 1,
@@ -406,48 +404,27 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
                             ? SizeConfig.defaultSize! * 1
                             : SizeConfig.defaultSize! * .5,
                       ),
-
-                      ///------------------Agree Terms
-                      /*Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Theme(
-                            data: ThemeData(
-                                primarySwatch: Colors.amber,
-                                unselectedWidgetColor:
-                                    Theme.of(context).colorScheme.primary),
-                            child: Transform.scale(
-                              scale: 1,
-                              child: Checkbox(
-                                  value: isAgreeTerms,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      isAgreeTerms = value!;
-                                      print(isAgreeTerms.toString());
-                                    });
-                                  }),
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              // Navigator.of(context).push(MaterialPageRoute(
-                              //     builder: (_) => PrivacyPolicy()));
-                            },
-                            child: Text(
-                              local.agreeTermsAndConditions.toString(),
-                              style: TextStyle(
-                                fontSize: 14.sp,
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: Platform.isIOS
-                            ? SizeConfig.defaultSize! * 1
-                            : SizeConfig.defaultSize! * 0.5,
-                      ),
-                      */
+                      DefaultAppButton(
+                          onTap: () {
+                            if (_formKey.currentState!.validate()
+                                /*isAgreeTerms == true*/) {
+                              navigateTo(context, SuccessCreateAccount());
+                              // await cubit.signUp(
+                              //   name: userNameController.text,
+                              //   email: emailController.text,
+                              //   phone: phoneController.text,
+                              //   password: passwordController.text,
+                              //   licenseID: licenseIdController.text,
+                              //   country: 1,
+                              //   // country: countryModel!.id
+                              // );
+                            }
+                          },
+                          height: 51.h,
+                          width: size.width,
+                          btnTitle: local.createEmailAndPassword),
+                      ///هرجعها API
+                      /*
                       state is AuthLoading
                           ? const Center(
                               child: CircularProgressIndicator.adaptive(),
@@ -471,6 +448,7 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
                               height: 51.h,
                               width: size.width,
                               btnTitle: local.createEmailAndPassword),
+                      */
                       SizedBox(height: 50.sp),
                       // SizedBox(
                       //   height: SizeConfig.defaultSize! * 0.05,

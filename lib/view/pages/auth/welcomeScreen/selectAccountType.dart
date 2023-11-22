@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:you_can/language/locale.dart';
 import 'package:you_can/shared/shared_commponents/commponents.dart';
 import 'package:you_can/view/pages/auth/login/autth_view.dart';
+import 'package:you_can/view/pages/auth/sign_up/sign_up.dart';
 
 import '../../../widgets/defaultBtn.dart';
 import '../../../widgets/defultOutLineBtn.dart';
@@ -85,7 +86,7 @@ class _SelectAccountTypeState extends State<SelectAccountType> {
             ),
             SizedBox(height: size.height*0.1,),
             DefaultAppButton(onTap: (){
-              navigateTo(context, AuthView());
+              navigateTo(context, SignUp());
             }, height: 51.h, width: size.width, btnTitle: local.selectAccountType.toString())
           ],
         ),

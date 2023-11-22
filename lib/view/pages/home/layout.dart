@@ -56,7 +56,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
         textStyle: Theme.of(context)
             .textTheme
             .bodyMedium!
-            .copyWith(fontSize: 8.sp, fontWeight: FontWeight.bold),
+            .copyWith(fontSize:10.sp, fontWeight: FontWeight.w500),
         activeColorPrimary: Theme.of(context).colorScheme.onPrimary,
         inactiveColorPrimary: Colors.grey,
       ),
@@ -64,95 +64,66 @@ class _LayoutScreenState extends State<LayoutScreen> {
         icon: FittedBox(
           fit: BoxFit.none,
           clipBehavior: Clip.none,
-          child: Padding(
-            padding: EdgeInsets.only(
-              top: size.height * 0.014,
-            ),
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 3.sp),
-              child: SvgPicture.asset(
-                height:size.height*0.027,
-               'assets/images/fav.svg',
-                alignment: Alignment.center,
-                color: _page == 1 ?  Theme.of(context).colorScheme.onPrimary : Colors.grey,
-              ),
-            ),
+          child:  Padding(
+            padding:  EdgeInsets.only( top: size.height * 0.018,),
+            child:const Icon(Icons.video_collection,size: 25,),
           ),
         ),
-        title: "المفضله",
+        title: "Lectures",
         textStyle: Theme.of(context)
             .textTheme
             .bodyMedium!
-            .copyWith(fontSize: 8.sp, fontWeight: FontWeight.bold),
+            .copyWith(fontSize: 10.sp, fontWeight: FontWeight.w500),
         activeColorPrimary: Theme.of(context).colorScheme.onPrimary,
         inactiveColorPrimary: Colors.grey,
       ),
-      ///-----orders----------
       PersistentBottomNavBarItem(
         icon: FittedBox(
           fit: BoxFit.none,
           clipBehavior: Clip.none,
-          child: Padding(
-            padding: EdgeInsets.only(
-              top: size.height * 0.014,
-            ),
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 3.sp),
-              child: SvgPicture.asset(
-                height:size.height*0.027,
-                'assets/images/orders.svg',
-                color: _page == 2 ?  Theme.of(context).colorScheme.onPrimary : Colors.grey,
-              ),
-            ),
+          child:  Padding(
+            padding:  EdgeInsets.only( top: size.height * 0.018,),
+            child:const Icon(Icons.messenger_outlined,size: 25,),
           ),
         ),
-        title: locale!.myBookings,
+        title: 'Practice',
         textStyle: Theme.of(context)
             .textTheme
             .bodyMedium!
-            .copyWith(fontSize: 8.sp, fontWeight: FontWeight.bold),
+            .copyWith(fontSize: 10.sp, fontWeight: FontWeight.w500),
         activeColorPrimary: Theme.of(context).colorScheme.onPrimary,
         inactiveColorPrimary: Colors.grey,
       ),
-
       PersistentBottomNavBarItem(
         icon: FittedBox(
           fit: BoxFit.none,
-          child: Padding(
-            padding: EdgeInsets.only(
-              top: size.height * 0.014,
-            ),
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5.sp, vertical: 5.sp),
-              child: SvgPicture.asset(
-                height:size.height*0.03,
-                'assets/images/search.svg',
-                alignment: Alignment.center,
-                color: _page == 3 ? Theme.of(context).colorScheme.onPrimary : Colors.grey,
-              ),
-            ),
+          clipBehavior: Clip.none,
+          child:  Padding(
+            padding:  EdgeInsets.only( top: size.height * 0.018,),
+            child:const Icon(Icons.assignment,size: 25,),
           ),
         ),
         // textStyle: TextStyle(fontSize: 10,),
-        title: locale.search,
+        title: 'Exams',
         textStyle: Theme.of(context)
             .textTheme
             .bodyMedium!
-            .copyWith(fontSize: 8.sp, fontWeight: FontWeight.bold),
+            .copyWith(fontSize: 10.sp, fontWeight: FontWeight.w500),
         activeColorPrimary: Theme.of(context).colorScheme.onPrimary,
         inactiveColorPrimary: Colors.grey,
       ),
       PersistentBottomNavBarItem(
         icon: FittedBox(
-            fit: BoxFit.none, child: GestureDetector(
-          child: Padding(
+          fit: BoxFit.none,
+          clipBehavior: Clip.none,
+          child:  Padding(
             padding:  EdgeInsets.only( top: size.height * 0.018,),
-            child:const Icon(Icons.notifications_active_outlined,size: 25,),
+            child:const Icon(Icons.person,size: 25,),
           ),
-        )),
-        textStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 8.sp, fontWeight: FontWeight.bold),
-        title: "الأشعارات",
-        activeColorPrimary: Theme.of(context).colorScheme.onPrimary,
+        ),
+        textStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 10.sp, fontWeight: FontWeight.w500),
+        title: 'My account',
+        activeColorPrimary: Theme.of(context).colorScheme.primary,
         inactiveColorPrimary: Colors.grey,
       ),
     ];

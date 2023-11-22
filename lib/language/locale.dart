@@ -561,6 +561,14 @@ class AppLocalizations {
   String? get welcomeAgainSubtitel{
     return _localizedValues[locale.languageCode]!['welcomeAgainSubtitel'];
   }
+  String? get liveLectures{
+    return _localizedValues[locale.languageCode]!['liveLectures'];
+  }
+  String? get levels{
+    return _localizedValues[locale.languageCode]!['levels'];
+  } String? get seeAll{
+    return _localizedValues[locale.languageCode]!['seeAll'];
+  }
   String? get applePay{
     return _localizedValues[locale.languageCode]!['applePay'];
   }

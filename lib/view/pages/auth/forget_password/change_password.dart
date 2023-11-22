@@ -6,6 +6,8 @@ import 'package:you_can/provider/auth_cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:you_can/view/widgets/defaultBtn.dart';
+
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'dart:math' as math;
 
@@ -17,10 +19,18 @@ import '../../../widgets/custom_text_feild.dart';
 import '../otp/otp.dart';
 import '../widget/background.dart';
 
-class ChangePassword extends StatelessWidget {
-  final phoneController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
+class ChangePassword extends StatefulWidget {
+
   ChangePassword({Key? key}) : super(key: key);
+
+  @override
+  State<ChangePassword> createState() => _ChangePasswordState();
+}
+
+class _ChangePasswordState extends State<ChangePassword> {
+  final phoneController = TextEditingController();
+
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -50,124 +60,121 @@ class ChangePassword extends StatelessWidget {
         },
         builder: (context, state) {
           return SingleChildScrollView(
-            child:Column(
-              children: [
-                SizedBox(height: size.height*0.08,),
-                Text(local!.resetPassword.toString(),style: TextStyle(
-                  fontSize: 16.sp,
-                ),),
-                SizedBox(height: 0.03.sh,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Transform(
-                      transform: CheckLocal.isDirectionRTL(context)
-                          ? Matrix4.rotationX(math.pi / 90)
-                          : Matrix4.rotationX(math.pi / 120),
-                      child: Icon(
-                        Icons.sms,
-                        size: SizeConfig.defaultSize! * 6,
-                      ),
-                    ),
-                    SizedBox(
-                      width: SizeConfig.defaultSize! * 1,
-                    ),
-                    RichText(
-                      text: TextSpan(
-                        text: local.changePassword,
-                        style: CheckLocal.isDirectionRTL(context)
-                            ? Theme.of(context)
-                            .textTheme
-                            .bodyText1!
-                            .copyWith(
-                          fontSize: 16,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        )
-                            : Theme.of(context)
-                            .textTheme
-                            .bodyText1!
-                            .copyWith(
-                            fontSize: 20,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            height: SizeConfig.defaultSize! * 0.22),
-                        children: <TextSpan>[
-                          TextSpan(
-                              text: local.changePassword,
-                              style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.normal)),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: SizeConfig.defaultSize! * 1,
-                ),
-                Form(
-                  key: _formKey,
-                  child: Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: size.width*0.09,vertical: size.height*0.05),
-                    child: CustomTextFeild(
-                      inputFormatters: [
-                        LengthLimitingTextInputFormatter(11),
-                      ],
-                      controller: phoneController,
-                      type: TextInputType.phone,
-                      label: local.pleaseEnterPhoneNumber,
-                      pIcon: Icons.phone_android_outlined,
-                      // preText: CheckLocal.isDirectionRTL(context)?' | 966 +':' + 966 | ',
-                      validat: (value) =>
-                          FormValidator.phoneValidate(context, value),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: size.width * 0.05),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: size.height * 0.08,
+                  ),
+                  Text(
+                    local!.resetPassword.toString(),
+                    style: TextStyle(
+                      fontSize: 16.sp,
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: SizeConfig.defaultSize! * 2,
-                ),
-                state is AuthLoading
-                    ? const Center(
-                  child: CircularProgressIndicator.adaptive(),
-                )
-                    : SizedBox(
-                    width: SizeConfig.defaultSize! * 15,
-                    child: ElevatedButton(
-                        style: ButtonStyle(
-                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  // side: BorderSide(color: Colors.red)
-                                )
-                            )),
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            ///-----دي حذف بعد API
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const OTP(
-                                      namePage: "changePassword",
-                                    )));
-                            ///----------
-                            // BlocProvider.of<AuthCubit>(context)
-                            //     .forget(phone: phoneController.text);
-                          }
-                        },
-                        child: Text(local.send!,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16.sp
-                        ),))),
-                // ElevatedButton.icon(
-                //     onPressed: () {
-                //       BlocProvider.of<LanguageCubit>(context)
-                //           .selectEngLanguage();
-                //     },
-                //     icon: const Icon(Icons.language),
-                //     label: const Text("Change Languagh"))
-              ],
+                  SizedBox(
+                    height: 0.03.sh,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Transform(
+                        transform: CheckLocal.isDirectionRTL(context)
+                            ? Matrix4.rotationX(math.pi / 90)
+                            : Matrix4.rotationX(math.pi / 120),
+                        child: Icon(
+                          Icons.sms,
+                          size: SizeConfig.defaultSize! * 6,
+                        ),
+                      ),
+                      SizedBox(
+                        width: SizeConfig.defaultSize! * 1,
+                      ),
+                      Text(
+                        local.changePassword.toString(),
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                              fontSize: 16,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: SizeConfig.defaultSize! * 1,
+                  ),
+
+                  Form(
+                    key: formKey,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: size.width * 0.0,
+                          vertical: size.height * 0.05),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                local.phoneNumber.toString(),
+                                style: TextStyle(
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: size.height * 0.02,
+                          ),
+                          CustomTextFeild(
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(11),
+                            ],
+                            controller: phoneController,
+                            type: TextInputType.phone,
+                            label: local.pleaseEnterPhoneNumber,
+                            pIcon: Icons.phone_android_outlined,
+                            validat: (value) =>
+                                FormValidator.phoneValidate(context, value),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: SizeConfig.defaultSize! * 2,
+                  ),
+                  state is AuthLoading
+                      ? const Center(
+                          child: CircularProgressIndicator.adaptive(),
+                        )
+                      : DefaultAppButton(
+                          onTap: (){
+                            if (formKey.currentState!.validate()) {
+                              ///-----دي حذف بعد API
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const OTP(
+                                        namePage: "changePassword",
+                                      )));
+                              ///----------
+                              // BlocProvider.of<AuthCubit>(context)
+                              //     .forget(phone: phoneController.text);
+                            }
+                          },
+                          height: 51.h,
+                          width: size.width/1,
+                          btnTitle: local.send.toString()),
+                  // ElevatedButton.icon(
+                  //     onPressed: () {
+                  //       BlocProvider.of<LanguageCubit>(context)
+                  //           .selectEngLanguage();
+                  //     },
+                  //     icon: const Icon(Icons.language),
+                  //     label: const Text("Change Languagh"))
+                ],
+              ),
             ),
           );
         },

@@ -1,6 +1,7 @@
 import 'package:you_can/core/size_config/size_config.dart';
 import 'package:you_can/language/locale.dart';
 import 'package:you_can/view/pages/auth/reset_password/reset_password.dart';
+
 // import 'package:you_can/view/pages/home/layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:you_can/view/widgets/defaultBtn.dart';
 import 'dart:math' as math;
 import '../../../../core/localization/check_local.dart';
 import '../../../../core/validation/form_validator.dart';
@@ -158,14 +160,18 @@ class _OTPState extends State<OTP> {
               children: [
                 Column(
                   children: [
-
                     SizedBox(
-                      height: size.height*0.08,
+                      height: size.height * 0.08,
                     ),
-                    Text(local!.resetPassword.toString(),style: TextStyle(
-                      fontSize: 16.sp,
-                    ),),
-                    SizedBox(height: 0.02.sh,),
+                    Text(
+                      local!.resetPassword.toString(),
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 0.02.sh,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -183,7 +189,7 @@ class _OTPState extends State<OTP> {
                         ),
                         RichText(
                           text: TextSpan(
-                            text: "local.otpCode",
+                            text: 'Please Enter Your OTP',
                             style: CheckLocal.isDirectionRTL(context)
                                 ? Theme.of(context)
                                     .textTheme
@@ -202,11 +208,11 @@ class _OTPState extends State<OTP> {
                                         fontWeight: FontWeight.bold,
                                         height: SizeConfig.defaultSize! * 0.22),
                             children: <TextSpan>[
-                              TextSpan(
-                                  text: "local.otpDesc",
-                                  style: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.normal)),
+                              // TextSpan(
+                              //     text: "local.otpDesc",
+                              //     style: const TextStyle(
+                              //         fontSize: 16,
+                              //         fontWeight: FontWeight.normal)),
                             ],
                           ),
                         )
@@ -216,9 +222,8 @@ class _OTPState extends State<OTP> {
                       height: SizeConfig.defaultSize! * 2,
                     ),
                     widget.namePage == "signUp"
-                        ?const Padding(
-                            padding:
-                                 EdgeInsets.symmetric(horizontal: 30.0),
+                        ? const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 30.0),
                           )
                         : const SizedBox.shrink(),
                     SizedBox(
@@ -238,7 +243,7 @@ class _OTPState extends State<OTP> {
                             animationType: AnimationType.fade,
                             pinTheme: PinTheme(
                               inactiveColor:
-                                  Theme.of(context).colorScheme.secondary,
+                                  Theme.of(context).colorScheme.primary,
                               selectedColor:
                                   Theme.of(context).colorScheme.primary,
                               inactiveFillColor: Colors.white,
@@ -307,7 +312,7 @@ class _OTPState extends State<OTP> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
-                            "local.sendAgain",
+                            "SendAgain",
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 16.sp,
@@ -322,7 +327,7 @@ class _OTPState extends State<OTP> {
                                     .sendAgain(phone: widget.phone.toString());
                               },
                               child: Text(
-                                "local.sendAgain2",
+                                "Here",
                                 style: TextStyle(
                                     color:
                                         Theme.of(context).colorScheme.primary,
@@ -339,47 +344,41 @@ class _OTPState extends State<OTP> {
                         ? const Center(
                             child: CircularProgressIndicator(),
                           )
-                        : SizedBox(
-                            width: SizeConfig.defaultSize! * 15,
-                            child: ElevatedButton(
-                                style: ButtonStyle(
-                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(8.0),
-                                          // side: BorderSide(color: Colors.red)
-                                        )
-                                    )),
-                                onPressed: () {
-                                  if (currentText.length == 4) {
-                                    ///-----مسح API
-                                    navigateTo(context, ResetPassword());
-                                    // emailCreated == false;
-                                    // if (HiveHelper()
-                                    //         .getData("sendAgainToken") !=
-                                    //     null) {
-                                    //   BlocProvider.of<AuthCubit>(context)
-                                    //       .againCheckOtp(otpControler.text);
-                                    //   setState(() {
-                                    //     print(emailCreated.toString());
-                                    //     print('=====+');
-                                    //   });
-                                    // } else {
-                                    //   HiveHelper().getData("tokenRegister") !=
-                                    //           null
-                                    //       ? BlocProvider.of<AuthCubit>(context)
-                                    //           .checkOtp(otpControler.text)
-                                    //       : BlocProvider.of<AuthCubit>(context)
-                                    //           .checkOtpPass(otpControler.text);
-                                    //   print(HiveHelper()
-                                    //       .getData('sendAgainToken')
-                                    //       .toString());
-                                    //   print('=====');
-                                    // }
-                                  }
-                                },
-                                child: Text(local.confirm,style:const TextStyle(
-                                  color: Colors.white
-                                ),))),
+                        : Padding(
+                          padding:  EdgeInsets.symmetric(horizontal: size.width*0.05),
+                          child: DefaultAppButton(
+                              onTap: (){
+                                if (currentText.length == 4) {
+                                  ///-----مسح API
+                                  navigateTo(context, ResetPassword());
+                                  // emailCreated == false;
+                                  // if (HiveHelper()
+                                  //         .getData("sendAgainToken") !=
+                                  //     null) {
+                                  //   BlocProvider.of<AuthCubit>(context)
+                                  //       .againCheckOtp(otpControler.text);
+                                  //   setState(() {
+                                  //     print(emailCreated.toString());
+                                  //     print('=====+');
+                                  //   });
+                                  // } else {
+                                  //   HiveHelper().getData("tokenRegister") !=
+                                  //           null
+                                  //       ? BlocProvider.of<AuthCubit>(context)
+                                  //           .checkOtp(otpControler.text)
+                                  //       : BlocProvider.of<AuthCubit>(context)
+                                  //           .checkOtpPass(otpControler.text);
+                                  //   print(HiveHelper()
+                                  //       .getData('sendAgainToken')
+                                  //       .toString());
+                                  //   print('=====');
+                                  // }
+                                }
+                              },
+                              height: 51.h,
+                              width: size.width,
+                              btnTitle: local.confirm),
+                        )
                     // ElevatedButton.icon(
                     //     onPressed: () {
                     //       BlocProvider.of<LanguageCubit>(context)
