@@ -20,6 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final size = MediaQuery.of(context).size;
     final locale = AppLocalizations.of(context);
     return Scaffold(
+      backgroundColor: Color(0xffF6F6F6),
       appBar: AppBar(
         title: SvgPicture.asset('assets/images/logo.svg'),
         actions: [
@@ -34,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Column(
+
             children: [
               Container(
                 width: size.width,
@@ -163,27 +165,35 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 Widget listOfLevels(locale,context) => Container(
+  decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(8),
+      color: Colors.white
+  ),
       height:75.h,
       width: MediaQuery.of(context).size.width/1,
       child: Row(
         children: [
-          Column(
-            children: [
-              Text(
-                'Level One',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w600),
-              ),
-              Text(
-                locale!.liveLectures.toString(),
-                style: TextStyle(
-                    color: Color(0xff7D7D7D),
-                    fontSize: 13.sp,
-                    fontWeight: FontWeight.w500),
-              ),
-            ],
+          Padding(
+            padding:  EdgeInsets.symmetric(horizontal: 10.w),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Level One',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w600),
+                ),
+                Text(
+                  locale!.liveLectures.toString(),
+                  style: TextStyle(
+                      color: Color(0xff7D7D7D),
+                      fontSize: 13.sp,
+                      fontWeight: FontWeight.w500),
+                ),
+              ],
+            ),
           ),
           Spacer(),
           SvgPicture.asset('assets/images/arrow.svg'),

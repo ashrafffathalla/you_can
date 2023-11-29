@@ -52,6 +52,7 @@ Map<String, String> arabic() {
     "automatedBookings": "الحجوزات الآلية",
     "someDataNotComplete": "بعض البيانات غير مكتلمة ",
     "pickUpArea": "منطقة الاستلام",
+    "lessons": "الدروس",
     "automatedRent": " التأجير الآلي  ",
     "classicRent": "التأجير الكلاسيكي",
     "abudiyabWelcome":

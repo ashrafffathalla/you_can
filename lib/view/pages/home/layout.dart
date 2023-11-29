@@ -6,11 +6,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:you_can/language/locale.dart';
-import 'package:you_can/view/pages/home/favorite/favorite_screen.dart';
 import 'package:you_can/view/pages/home/home/home_screen.dart';
 import 'package:you_can/view/pages/home/my_orders/myOrders_screen.dart';
 import 'package:you_can/view/pages/home/notification/notification_screen.dart';
 import 'package:you_can/view/pages/home/search/search_screen.dart.dart';
+
+import 'lectures/lectures_screen.dart';
 
 
 
@@ -26,7 +27,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
   int _page = 0;
   List<Widget> _buildScreens() =>const[
     HomeScreen(),
-    FavoriteScreen(),
+    LecturesScreen(),
     MyOrdersScreen(),
     SearchScreen(),
     NotificationScreen(),

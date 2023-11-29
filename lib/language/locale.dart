@@ -93,6 +93,8 @@ class AppLocalizations {
 
   String get automatedBookings =>
       _localizedValues[locale.languageCode]!['automatedBookings']!;
+  String get lessons =>
+      _localizedValues[locale.languageCode]!['lessons']!;
 
   String get someDataNotComplete =>
       _localizedValues[locale.languageCode]!['someDataNotComplete']!;
