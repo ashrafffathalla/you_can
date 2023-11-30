@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:you_can/language/locale.dart';
 import 'package:you_can/shared/shared_commponents/commponents.dart';
 
-import '../../../widgets/list_of_LevelsScreen.dart';
-import 'lessonVideo.dart';
+import '../../../../widgets/list_of_LevelsScreen.dart';
+import 'inside_screens/lessonVideo/lessonVideo.dart';
 
 class LessonsScreen extends StatelessWidget {
   const LessonsScreen({super.key});

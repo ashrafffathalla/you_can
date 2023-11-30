@@ -95,6 +95,12 @@ class AppLocalizations {
       _localizedValues[locale.languageCode]!['automatedBookings']!;
   String get lessons =>
       _localizedValues[locale.languageCode]!['lessons']!;
+  String get caption =>
+      _localizedValues[locale.languageCode]!['caption']!;
+  String get comments =>
+      _localizedValues[locale.languageCode]!['Comments']!;
+  String get assignment =>
+      _localizedValues[locale.languageCode]!['Assignment']!;
 
   String get someDataNotComplete =>
       _localizedValues[locale.languageCode]!['someDataNotComplete']!;
