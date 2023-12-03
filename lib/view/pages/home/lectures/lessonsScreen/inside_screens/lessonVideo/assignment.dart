@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:you_can/data/model/quistionsModel.dart';
 import 'package:you_can/language/locale.dart';
 
@@ -11,8 +12,13 @@ class AssignmentScreen extends StatefulWidget {
 }
 
 class _AssignmentScreenState extends State<AssignmentScreen> {
+  late FlutterTts flutterTts;
   int questionNumber = 1;
-
+  @override
+  initState() {
+    super.initState();
+    // initTts();
+  }
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -66,6 +72,27 @@ class _AssignmentScreenState extends State<AssignmentScreen> {
                                 fontWeight: FontWeight.w600
                               ),
                             ),
+                            Spacer(),
+                            GestureDetector(
+                              onTap: ()async{
+                                // hiveHelper!.getData("lang")
+                                await flutterTts.setLanguage("en-US");
+                                await flutterTts.setSpeechRate(0.5); //speed of speech
+                                await flutterTts.setVolume(1.0); //volume of speech
+                                await flutterTts.setPitch(1);
+                                await flutterTts.speak(_qustion.text);
+                                var result = await flutterTts.speak("Hello World, this is Flutter Campus.");
+                                if(result == 1){
+                                  //speaking
+                                }else{
+                                  //not speaking
+                                }
+                              },
+                              child: CircleAvatar(
+                                  child: Icon(Icons.volume_up_outlined,color: Colors.white,),
+                                backgroundColor: Theme.of(context).colorScheme.primary,
+                              ),
+                            )
                           ],
                         ),
                         Column(
