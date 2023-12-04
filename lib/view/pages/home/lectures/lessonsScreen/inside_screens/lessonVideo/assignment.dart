@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_tts/flutter_tts.dart';
@@ -14,11 +16,33 @@ class AssignmentScreen extends StatefulWidget {
 class _AssignmentScreenState extends State<AssignmentScreen> {
   late FlutterTts flutterTts;
   int questionNumber = 1;
+
   @override
   initState() {
     super.initState();
-    // initTts();
+     initTts();
   }
+  initTts() {
+    flutterTts = FlutterTts();
+    _setAwaitOptions();
+    if (Platform.isAndroid) {
+      flutterTts.getDefaultEngine;
+      flutterTts.getDefaultVoice;
+    }
+  }
+  Future _setAwaitOptions() async {
+    await flutterTts.awaitSpeakCompletion(true);
+  }
+  Future speak(String newVoiceText) async {
+
+    await flutterTts.setVolume(1.0);
+    await flutterTts.setSpeechRate(0.5);
+    await flutterTts.setPitch(1);
+    if (newVoiceText.isNotEmpty) {
+      await flutterTts.speak(newVoiceText);
+    }
+    }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -74,19 +98,8 @@ class _AssignmentScreenState extends State<AssignmentScreen> {
                             ),
                             Spacer(),
                             GestureDetector(
-                              onTap: ()async{
-                                // hiveHelper!.getData("lang")
-                                await flutterTts.setLanguage("en-US");
-                                await flutterTts.setSpeechRate(0.5); //speed of speech
-                                await flutterTts.setVolume(1.0); //volume of speech
-                                await flutterTts.setPitch(1);
-                                await flutterTts.speak(_qustion.text);
-                                var result = await flutterTts.speak("Hello World, this is Flutter Campus.");
-                                if(result == 1){
-                                  //speaking
-                                }else{
-                                  //not speaking
-                                }
+                              onTap: (){
+                                speak(_qustion.text);
                               },
                               child: CircleAvatar(
                                   child: Icon(Icons.volume_up_outlined,color: Colors.white,),
