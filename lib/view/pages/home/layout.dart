@@ -28,7 +28,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
   List<Widget> _buildScreens() =>[
     HomeScreen(),
     LecturesScreen(),
-    SessionsScreen(),
+    PraciceScreen(),
     SearchScreen(),
     MyAccountScreen(),
   ];

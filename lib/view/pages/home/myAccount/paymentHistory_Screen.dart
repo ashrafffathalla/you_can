@@ -10,7 +10,9 @@ class PaymentHistoryScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final locale = AppLocalizations.of(context);
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text('Payment History'),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
