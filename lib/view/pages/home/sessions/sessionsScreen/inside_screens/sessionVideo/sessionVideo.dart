@@ -38,7 +38,11 @@ class _SessionVideoScreenState extends State<SessionVideoScreen> {
       child: Stack(
         children: [
           Scaffold(
-            appBar: AppBar(),
+            appBar: AppBar(
+              leading: GestureDetector( onTap:() {
+                Navigator.pop(context);},
+                  child: Icon(Icons.arrow_back_ios_new)),
+            ),
             body: SingleChildScrollView(
               child: Column(
                 children: [

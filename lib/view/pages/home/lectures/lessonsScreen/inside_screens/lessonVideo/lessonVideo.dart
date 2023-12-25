@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:video_player/video_player.dart';
 import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:you_can/language/locale.dart';
+import 'package:you_can/shared/shared_commponents/commponents.dart';
+import 'package:you_can/view/pages/home/layout.dart';
 import 'package:you_can/view/pages/home/lectures/lessonsScreen/inside_screens/lessonVideo/assignment.dart';
 import 'package:you_can/view/pages/home/lectures/lessonsScreen/inside_screens/lessonVideo/captionScreen.dart';
 import 'package:you_can/view/pages/home/lectures/lessonsScreen/inside_screens/lessonVideo/comments.dart';
@@ -123,7 +125,9 @@ class _LessonVideoScreenState extends State<LessonVideoScreen> {
                         tabs: [
                           Center(child: Text('Caption',style: TextStyle(fontWeight: FontWeight.w600,fontSize: 16.sp),)),
                           Center(child: Text('Comments',style: TextStyle(fontWeight: FontWeight.w600,fontSize: 16.sp),)),
-                          Center(child: Text("Assignment",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 16.sp),)),
+                          GestureDetector(onTap: () {
+                            navigateTo(context, AssignmentScreen());
+                          },child: Center(child: Text("Assignment",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 16.sp),))),
 
                         ],
                       ),
@@ -137,7 +141,8 @@ class _LessonVideoScreenState extends State<LessonVideoScreen> {
                       children: [
                         CaptionScreen(),
                         CommentsScreen(),
-                        AssignmentScreen(),
+                        // AssignmentScreen(),
+                        Container(),
                       ],
                     ),
                   )

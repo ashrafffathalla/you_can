@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:you_can/language/locale.dart';
+import 'package:you_can/shared/shared_commponents/commponents.dart';
+import 'package:you_can/view/pages/home/notification/notification_screen.dart';
 import 'package:you_can/view/widgets/defaultBtn.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -26,7 +28,9 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 15.w),
-            child: Icon(Icons.notifications),
+            child: InkWell (onTap: () {
+              navigateTo(context, NotificationScreen());
+            },child: Icon(Icons.notifications)),
           )
         ],
       ),
@@ -185,13 +189,7 @@ Widget listOfLevels(locale,context) => Container(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w600),
                 ),
-                Text(
-                  locale!.liveLectures.toString(),
-                  style: TextStyle(
-                      color: Color(0xff7D7D7D),
-                      fontSize: 13.sp,
-                      fontWeight: FontWeight.w500),
-                ),
+                Text(locale!.liveLectures.toString(), style: TextStyle(color: Color(0xff7D7D7D), fontSize: 13.sp, fontWeight: FontWeight.w500),),
               ],
             ),
           ),
