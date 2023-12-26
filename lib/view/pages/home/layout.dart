@@ -7,11 +7,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:you_can/language/locale.dart';
 import 'package:you_can/view/pages/home/home/home_screen.dart';
-import 'package:you_can/view/pages/home/notification/notification_screen.dart';
-import 'package:you_can/view/pages/home/search/search_screen.dart.dart';
+import 'package:you_can/view/pages/home/practice/practice_screen.dart';
 import 'package:you_can/view/pages/home/sessions/sessions_screen.dart';
-
+import 'exams/Exams_screen.dart.dart';
 import 'lectures/lectures_screen.dart';
+import 'myAccount/myaccount_screen.dart';
 
 
 
@@ -25,12 +25,12 @@ class LayoutScreen extends StatefulWidget {
 class _LayoutScreenState extends State<LayoutScreen> {
 
   int _page = 0;
-  List<Widget> _buildScreens() =>const[
+  List<Widget> _buildScreens() =>[
     HomeScreen(),
     LecturesScreen(),
-    SessionsScreen(),
-    SearchScreen(),
-    NotificationScreen(),
+    PracticeScreen(),
+    ExamsScreen(),
+    MyAccountScreen(),
   ];
   late PersistentTabController _controller;
   @override

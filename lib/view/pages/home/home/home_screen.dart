@@ -4,8 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:you_can/language/locale.dart';
 import 'package:you_can/shared/shared_commponents/commponents.dart';
-import 'package:you_can/view/pages/home/notification/notification_screen.dart';
 import 'package:you_can/view/widgets/defaultBtn.dart';
+import 'notification/notification_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: InkWell (onTap: () {
               navigateTo(context, NotificationScreen());
             },child: Icon(Icons.notifications)),
-          )
+          ),
         ],
       ),
       body: Padding(
