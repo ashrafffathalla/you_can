@@ -255,7 +255,7 @@ Map<String, String> arabic() {
     'registerNow': 'سجل الان',
     'register': 'تسجيل حساب',
     'enterName': 'أدخل الاسم',
-    'verification': 'التحقق',
+    'verification': 'تأكيد الحساب',
     'enterCode': 'ادخل الرمز',
     'setLocation': 'تحديد المكان',
     'reviews': 'التعليقات',

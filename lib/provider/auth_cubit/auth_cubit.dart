@@ -43,42 +43,42 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
 //user login
-  login({required String email, required String password}) async {
+  studentLogin({required String phone, required String code, required String password, }) async {
     emit(AuthLoading());
     try {
-      await loginRepositories.login(email: email, password: password);
+      await loginRepositories.studentLogin(
+          phone: phone,
+          password: password,
+          code: code);
+      print('4444444');
       emit(AuthLoaded());
     } catch (e) {
       print("log ++++ $e");
+      print("log ++++ $phone");
       emit(AuthError(error: e.toString()));
     }
   }
 
-  //user Register
-  signUp({
-    required String name,
-    required String email,
+  //student Register
+  studentSignUp({
+    required String full_name,
     required String phone,
     required String password,
-    required String licenseID,
-    required int country ,
+    required String password_confirmation,
+    required String gender,
+    required String birth_date,
+
   }) async {
     emit(AuthLoading());
     try {
-      await signUpRepositories.signUp(
-          email: email,
-          name: name,
+      await signUpRepositories.studentSignUp(
+          name: full_name,
           phone: phone,
           password: password,
-          country: 1,
-          licenseID: licenseID,
-          image: imagePathFace.toString());
-       //print(email.toString()+'ssss');
-      // print(name.toString());
-      // print(phone.toString());
-     //  print(country.toString()+'sssss');
-      // print(licenseID.toString());
-      // print(imagePathFace.toString()+' 55555 ');
+        password_confirmation: password_confirmation,
+        birth_date:birth_date,
+        gender: gender,
+         );
       emit(AuthLoaded());
     } catch (e) {
       emit(AuthError(error: e.toString()));

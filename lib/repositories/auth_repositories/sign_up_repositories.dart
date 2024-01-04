@@ -54,24 +54,24 @@ class SignUpRepositories {
 //   }
 
 //Sign Up
-  Future<Response> signUp(
-      {required String email,
+  Future<Response> studentSignUp(
+      {
       required String name,
       required String phone,
       required String password,
-      required String image,
-      required String licenseID,
-      required int country,
+      required String password_confirmation,
+      required String birth_date,
+      required String gender,
       }) async {
     try {
+
       FormData formData = FormData.fromMap({
         "full_name": name,
-        "email": email,
         "phone": phone,
         "password": password,
-        "country": country,
-        "license_id": licenseID,
-        "license_image": await MultipartFile.fromFile(image, filename: image),
+        "password_confirmation": password_confirmation,
+        "birth_date": birth_date,
+        "gender": gender,
       });
       final Response response = await dioHelper.postData(
         needAuth: false,
@@ -80,9 +80,11 @@ class SignUpRepositories {
       );
       print(response.data);
       var data = jsonDecode(response.data) as Map<String, dynamic>;
-      token = data['data']["token"];
-       await HiveHelper().putData('tokenRegister', token);
-      print(HiveHelper().getData('tokenRegister').toString()+'65656565656');
+      dynamic code = data['student']["code"];
+      await HiveHelper().putData('studentCode', code);
+      // token = data['data']["token"];
+      //  await HiveHelper().putData('tokenRegister', token);
+      // print(HiveHelper().getData('tokenRegister').toString()+'65656565656');
 
       return response;
     } on DioError catch (dioError) {

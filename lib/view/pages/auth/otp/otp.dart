@@ -238,7 +238,7 @@ class _OTPState extends State<OTP> {
                               : TextDirection.ltr,
                           child: PinCodeTextField(
                             autoFocus: true,
-                            length: 4,
+                            length: 6,
                             obscureText: false,
                             animationType: AnimationType.fade,
                             pinTheme: PinTheme(

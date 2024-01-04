@@ -1,9 +1,11 @@
 import 'dart:io';
 import 'package:you_can/core/localization/check_local.dart';
 import 'package:you_can/core/size_config/size_config.dart';
+import 'package:you_can/data/local/hiva_helper.dart';
 import 'package:you_can/provider/auth_cubit/auth_cubit.dart';
 import 'package:you_can/shared/shared_commponents/commponents.dart';
 import 'package:intl/intl.dart';
+import 'package:you_can/view/pages/auth/otp/otp.dart';
 import 'package:you_can/view/pages/auth/sign_up/success_create_Account.dart';
 import 'package:you_can/view/widgets/custom_text_feild.dart';
 import 'package:flutter/material.dart';
@@ -33,8 +35,7 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
   late TextEditingController confirmPasswordController;
   late TextEditingController phoneController;
   late TextEditingController licenseIdController;
-  late TextEditingController emailController;
-  late TextEditingController dateController;
+  late TextEditingController genderController;
   bool isAgreeTerms = false;
   final _formKey = GlobalKey<FormState>();
   String _selectedDate = '2000-01-01 12:34:56.000';
@@ -64,12 +65,11 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     userNameController = TextEditingController();
-    dateController = TextEditingController();
+    genderController = TextEditingController();
     passwordController = TextEditingController();
     confirmPasswordController = TextEditingController();
     phoneController = TextEditingController();
-    emailController = TextEditingController();
-    licenseIdController = TextEditingController();
+
     _tabController = TabController(length: 2, vsync: this);
     _tabController.addListener(_handleTabSelection);
   }
@@ -87,72 +87,6 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
     return Scaffold(
       body: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
-          if (state is AuthError) {
-            state.error.contains("path = ''")
-                ? showDialog(
-                    context: context,
-                    builder: (_) {
-                      return AlertDialog(
-                        title:
-                            //  Center(child: Icon(Icons.close,color: Colors.orangeAccent,)),
-                            Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Center(
-                                child: SvgPicture.asset(
-                                    'assets/images/infoIcon.svg')),
-                          ],
-                        ),
-                        content: Text(
-                          CheckLocal.isDirectionRTL(context)
-                              ? 'يجب ارفاق صورة رخصة القيادة'
-                              : "driver's license must be attached",
-                          style: TextStyle(
-                            fontSize: 15.sp,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      );
-                    })
-                : showDialog(
-                    context: context,
-                    builder: (_) {
-                      return AlertDialog(
-                        title: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                GestureDetector(
-                                  child: Icon(
-                                    Icons.close,
-                                    color: Colors.black87,
-                                  ),
-                                  onTap: () {
-                                    Navigator.pop(context);
-                                  },
-                                ),
-                              ],
-                            ),
-                            Center(
-                                child: SvgPicture.asset(
-                                    'assets/images/infoIcon.svg')),
-                          ],
-                        ),
-                        content: Text(
-                          state.error.toString(),
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      );
-                    });
-          }
           //  if (state is AuthError) {
           //   showDialog(
           //       context: context,
@@ -180,49 +114,59 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
           //       });
           // }
           if (state is AuthLoaded) {
-            // BlocProvider.of<AuthCubit>(context).imagePathFace = "";
-            // navigateAndFinish(context, AuthView());
-            // // showDialog(
-            // //     context: context,
-            // //     builder: (context) {
-            // //       Future.delayed(Duration(seconds: 3), () {
-            // //         Navigator.pop(context);
-            // //       });
-            // //       return AlertDialog(
-            // //         title:
-            // //             //  Center(child: Icon(Icons.close,color: Colors.orangeAccent,)),
-            // //             Column(
-            // //           mainAxisAlignment: MainAxisAlignment.center,
-            // //           crossAxisAlignment: CrossAxisAlignment.center,
-            // //           children: [
-            // //             Center(
-            // //                 child: Icon(
-            // //               Icons.check_circle,
-            // //               color: Colors.green,
-            // //               size: 50.sp,
-            // //             )),
-            // //           ],
-            // //         ),
-            // //         content: Text(
-            // //           CheckLocal.isDirectionRTL(context)
-            // //               ? 'تم انشاء البريد الالكتروني بنجاح'
-            // //               : 'Email has been created successfully',
-            // //           textAlign: TextAlign.center,
-            // //           style: TextStyle(
-            // //             fontSize: 16.sp,
-            // //             fontWeight: FontWeight.w600,
-            // //           ),
-            // //         ),
-            // //       );
-            // //     });
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //       builder: (context) => OTP(
-            //             namePage: "signUp",
-            //             phone: phoneController.text,
-            //           )),
-            // );
+              showDialog(
+                  barrierDismissible: false,
+                  context: context,
+                  builder: (_) {
+                    return AlertDialog(
+                      title: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Center(
+                              child: CircleAvatar(
+                                   radius: 35.sp,
+                                  backgroundColor: Colors.green,
+                                  child: Icon(Icons.done,color: Colors.white,size: 35,))),
+                        ],
+                      ),
+                      content: Container(
+                        height: size.height/6,
+                        child: Column(
+                          children: [
+                            Text(
+                                CheckLocal.isDirectionRTL(context)?"من فضلك قم بنسخ الكود والاحتفاظ به لتسجيل الدخول":"Please copy and save the code to login",
+                                textAlign: TextAlign.center,
+                            ),
+                            SizedBox(height: size.height*0.03,),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                    HiveHelper().getData('studentCode').toString(),
+                                  style: TextStyle(
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                InkWell(
+                                    onTap: () async {
+                                      await Clipboard.setData(ClipboardData(text: HiveHelper().getData('studentCode').toString()));
+                                      // copied successfully
+                                    },
+                                    child: Icon(Icons.copy,size: 30.sp,color: Theme.of(context).colorScheme.primary,)),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      actions: [
+                        Center(child: DefaultAppButton(onTap: (){
+                          navigateTo(context, OTP(namePage: 'signUp'));
+                        }, height: 40.h, width: size.width*0.3, btnTitle: local!.verification.toString()))
+                      ],
+                    );
+                  });
           }
         },
         builder: (context, state) {
@@ -340,33 +284,44 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
                       SizedBox(
                         height: SizeConfig.defaultSize! * 1,
                       ),
+
                       ///--------------------
                       BeforTextForm(local.datetime.toString()),
-                  TextFormField(
-                    onTap: () {
-                      _selectDate(context);
-                    },
-                    readOnly: true,
-                    controller: TextEditingController(text: DateFormat('yyyy-MM-dd').format(DateTime.parse(_selectedDate))),
-                    decoration: InputDecoration(
-                      contentPadding:  EdgeInsets.symmetric(vertical: 10.h,horizontal: 13.w),
-                      errorBorder: OutlineInputBorder(
-                        // borderRadius: BorderRadius.circular(50),
-                          borderSide: BorderSide(
-                              color: Theme.of(context).colorScheme.error.withOpacity(0.3),
-                              width: 1.0)),
-                      focusedErrorBorder: OutlineInputBorder(
-                        // borderRadius: BorderRadius.circular(50.sp),
-                          borderSide: BorderSide(
-                              color: Theme.of(context).colorScheme.error.withOpacity(0.3),
-                              width: 1.0)),
-                      border: InputBorder.none,
-                      fillColor: Color(0XFFFFFFFF),
-                      filled: true,
-                      labelText: 'Pick a date',
-                      suffixIcon: Icon(Icons.calendar_month),
-                    ),
-                  ),
+                      TextFormField(
+                        onTap: () {
+                          _selectDate(context);
+                        },
+                        readOnly: true,
+                        controller: TextEditingController(
+                            text: DateFormat('yyyy-MM-dd')
+                                .format(DateTime.parse(_selectedDate))),
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.symmetric(
+                              vertical: 10.h, horizontal: 13.w),
+                          errorBorder: OutlineInputBorder(
+                              // borderRadius: BorderRadius.circular(50),
+                              borderSide: BorderSide(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .error
+                                      .withOpacity(0.3),
+                                  width: 1.0)),
+                          focusedErrorBorder: OutlineInputBorder(
+                              // borderRadius: BorderRadius.circular(50.sp),
+                              borderSide: BorderSide(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .error
+                                      .withOpacity(0.3),
+                                  width: 1.0)),
+                          border: InputBorder.none,
+                          fillColor: Color(0XFFFFFFFF),
+                          filled: true,
+                          labelText: 'Pick a date',
+                          suffixIcon: Icon(Icons.calendar_month),
+                        ),
+                      ),
+
                       ///--------------------
                       SizedBox(
                         height: SizeConfig.defaultSize! * 1,
@@ -404,51 +359,22 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
                             ? SizeConfig.defaultSize! * 1
                             : SizeConfig.defaultSize! * .5,
                       ),
-                      DefaultAppButton(
-                          onTap: () {
-                            if (_formKey.currentState!.validate()
-                                /*isAgreeTerms == true*/) {
-                              navigateTo(context, SuccessCreateAccount());
-                              // await cubit.signUp(
-                              //   name: userNameController.text,
-                              //   email: emailController.text,
-                              //   phone: phoneController.text,
-                              //   password: passwordController.text,
-                              //   licenseID: licenseIdController.text,
-                              //   country: 1,
-                              //   // country: countryModel!.id
-                              // );
+                      state is AuthLoading?Center(child: CircularProgressIndicator.adaptive()):DefaultAppButton(
+                          onTap: () async{
+                            if (_formKey.currentState!.validate() /*isAgreeTerms == true*/){
+                              // navigateTo(context, SuccessCreateAccount());
+                              await cubit.studentSignUp(
+                                  full_name: userNameController.text,
+                                  phone: phoneController.text,
+                                  password: passwordController.text,
+                                  password_confirmation: passwordController.text,
+                                  gender: _tabController.index == 0?'male':'female',
+                                  birth_date: _selectedDate.toString());
                             }
                           },
                           height: 51.h,
                           width: size.width,
                           btnTitle: local.createEmailAndPassword),
-                      ///هرجعها API
-                      /*
-                      state is AuthLoading
-                          ? const Center(
-                              child: CircularProgressIndicator.adaptive(),
-                            )
-                          : DefaultAppButton(
-                              onTap: () {
-                                if (_formKey.currentState!.validate() &&
-                                    isAgreeTerms == true) {
-                                  navigateTo(context, SuccessCreateAccount());
-                                  // await cubit.signUp(
-                                  //   name: userNameController.text,
-                                  //   email: emailController.text,
-                                  //   phone: phoneController.text,
-                                  //   password: passwordController.text,
-                                  //   licenseID: licenseIdController.text,
-                                  //   country: 1,
-                                  //   // country: countryModel!.id
-                                  // );
-                                }
-                              },
-                              height: 51.h,
-                              width: size.width,
-                              btnTitle: local.createEmailAndPassword),
-                      */
                       SizedBox(height: 50.sp),
                       // SizedBox(
                       //   height: SizeConfig.defaultSize! * 0.05,

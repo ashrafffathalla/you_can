@@ -262,7 +262,7 @@ Map<String, String> english() {
     'registerNow': 'Register Now',
     'register': 'Register',
     'enterName': 'Enter Name',
-    'verification': 'Verification',
+    'verification': 'Verify Account',
     'enterCode': 'Enter Code',
     'setLocation': 'Set Location',
     'reviews': 'Reviews',

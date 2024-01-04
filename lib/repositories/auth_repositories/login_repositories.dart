@@ -12,23 +12,23 @@ class LoginRepositories {
 
   LoginRepositories({required this.dioHelper, required this.hiveHelper});
 
-  Future<Response> login(
-      {required String email, required String password}) async {
+  Future<Response> studentLogin(
+      {required String phone, required String password, required String code}) async {
     try {
       final Response response = await dioHelper.postData(
         needAuth: false,
-        url: AutomationApi.loginUrl,
+        url: AutomationApi.studentLoginUrl,
         data: {
-          "data": email,
+          "phone": phone,
           "password": password,
+          "code": code,
         },
       );
       var data = jsonDecode(response.data) as Map<String, dynamic>;
-      String token = data['data']["token"];
-
-      await hiveHelper.putData("token", token);
+      // String token = data['data']["token"];
+      // await hiveHelper.putData("token", token);
       return response;
-    } on DioError catch (dioError) {
+    } on DioException catch (dioError) {
       var error = jsonDecode(dioError.response!.data) as Map<String, dynamic>;
       throw error['message'];
     } catch (error) {

@@ -164,8 +164,7 @@ class _LoginState extends State<Login> {
                                           ],
                                         ),
                                 Center(
-                                    child: SvgPicture.asset(
-                                        'assets/images/infoIcon.svg',)),
+                                    child: Icon(Icons.info,size:35.sp,color: Theme.of(context).colorScheme.primary,)),
                               ],
                             ),
                             content: Text(state.error,textAlign: TextAlign.center,),
@@ -195,11 +194,13 @@ class _LoginState extends State<Login> {
                   }
                   return DefaultAppButton(onTap: (){
                     if (_formKey.currentState!.validate()) {
-                      // BlocProvider.of<AuthCubit>(context).login(
-                      //     email: phoneController.text,
-                      //     password: passwordController.text);
+                      BlocProvider.of<AuthCubit>(context).studentLogin(
+                          phone: phoneController.text,
+                          password: passwordController.text,
+                        code: CodeController.text,
+                      );
                       ///-----مسح مع API
-                      navigateTo(context, LayoutScreen());
+                      // navigateTo(context, LayoutScreen());
                     }
                   }, height: 51.h, width: MediaQuery.of(context).size.width, btnTitle: local.signIn);
 
