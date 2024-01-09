@@ -16,7 +16,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:you_can/view/widgets/defaultBtn.dart';
 import '../../../../core/validation/form_validator.dart';
-
 // import '../../../../data/model/country_model.dart';
 import '../../../../language/locale.dart';
 import '../../../../provider/auth_cubit/auth_state.dart';
