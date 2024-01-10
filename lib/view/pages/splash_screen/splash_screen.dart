@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:you_can/view/pages/auth/login/autth_view.dart';
+import 'package:you_can/view/pages/home/home/home_screen.dart';
 import '../../../core/localization/check_local.dart';
 import '../../../core/size_config/size_config.dart';
 import '../../../data/local/hiva_helper.dart';
@@ -14,13 +15,12 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen>  with SingleTickerProviderStateMixin{
   late AnimationController _animationController;
   late Animation<double> _opacityAnimation;
-  // String? token = HiveHelper().getData("token");
-
+  String? token = HiveHelper().getData("token");
   late Widget startWidget;
-
   @override
   void initState() {
     super.initState();
+    print(token.toString()+"GGG");
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 2),
@@ -28,23 +28,23 @@ class _SplashScreenState extends State<SplashScreen>  with SingleTickerProviderS
     _opacityAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(_animationController);
 
     _animationController.forward();
-    // if (token != null) {
-    //   startWidget = const Home();
-    // } else {
-    //   startWidget = const AuthView();
-    // }
-    // Future.delayed(
-    //     const Duration(seconds: 5),
-    //     () => Navigator.pushReplacement(
-    //           context,
-    //           MaterialPageRoute(builder: (context) => startWidget),
-    //         ));
+    if (token != null) {
+      startWidget = const HomeScreen();
+    } else {
+      startWidget = const AuthView();
+    }
     Future.delayed(
-        const Duration(seconds:2),
+        const Duration(seconds: 1),
         () => Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) =>const AuthView()),
+              MaterialPageRoute(builder: (context) => startWidget),
             ));
+    // Future.delayed(
+    //     const Duration(seconds:2),
+    //     () => Navigator.pushReplacement(
+    //           context,
+    //           MaterialPageRoute(builder: (context) =>const AuthView()),
+    //         ));
   }
   @override
   void dispose() {

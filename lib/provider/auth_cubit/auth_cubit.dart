@@ -54,7 +54,6 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthLoaded());
     } catch (e) {
       print("log ++++ $e");
-      print("log ++++ $phone");
       emit(AuthError(error: e.toString()));
     }
   }

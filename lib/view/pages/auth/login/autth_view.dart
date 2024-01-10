@@ -32,7 +32,6 @@ class _AuthViewState extends State<AuthView> {
   @override
   void initState() {
     super.initState();
-    HiveHelper().removeData("token");
     // BlocProvider.of<AuthCubit>(context).getCountry();
   }
 

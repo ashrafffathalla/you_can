@@ -4,7 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:you_can/core/app_life_cycle_manager.dart';
 import 'package:you_can/language/locale.dart';
+import 'package:you_can/myobserver.dart';
 import 'package:you_can/provider/auth_cubit/auth_cubit.dart';
+import 'package:you_can/provider/levelsCubit/levelsCubit.dart';
 import 'package:you_can/view/pages/auth/login/autth_view.dart';
 import 'package:you_can/view/pages/auth/on_boarding/on_boarding.dart';
 import 'package:you_can/view/pages/auth/sign_up/sign_up.dart';
@@ -36,6 +38,7 @@ void main() async{
   ///------------injection Container & HIVHELPER----------
   await init();
   await HiveHelper.init();
+  Bloc.observer = MyObserver();
   runApp(const MyApp());
 }
 
@@ -54,9 +57,10 @@ class MyApp extends StatelessWidget {
         return MultiBlocProvider(
           providers: [
             BlocProvider<AuthCubit>(create: (context) => getIt<AuthCubit>()),
-            BlocProvider<LanguageCubit>(
-                create: (context) => getIt<LanguageCubit>()),
-                ],
+            BlocProvider<LanguageCubit>(create: (context) => getIt<LanguageCubit>()),
+            BlocProvider<AllLevelsCubit>(create: (context) => getIt<AllLevelsCubit>()..getAllLevels()),
+
+          ],
           child: BlocBuilder<LanguageCubit, Locale>(
             builder: (_, locale) {
               return MaterialApp(
@@ -70,7 +74,7 @@ class MyApp extends StatelessWidget {
                 locale: locale,
                 theme: lightTheme(),
                 themeMode: ThemeMode.system,
-                 home: WelcomeAuth(),
+                 home: SplashScreen(),
                 debugShowCheckedModeBanner: false,
               );
             },

@@ -1,8 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:you_can/language/locale.dart';
+import 'package:you_can/provider/levelsCubit/levelsCubit.dart';
+import 'package:you_can/provider/levelsCubit/levelsStates.dart';
 import 'package:you_can/shared/shared_commponents/commponents.dart';
 import 'package:you_can/view/widgets/defaultBtn.dart';
 import 'notification/notification_screen.dart';
@@ -21,154 +24,163 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final locale = AppLocalizations.of(context);
+    final cubit = BlocProvider.of<AllLevelsCubit>(context);
     return Scaffold(
-      backgroundColor: Color(0xffF6F6F6),
-      appBar: AppBar(
-        title: SvgPicture.asset('assets/images/logo.svg'),
-        actions: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15.w),
-            child: InkWell (onTap: () {
-              navigateTo(context, NotificationScreen());
-            },child: Icon(Icons.notifications)),
+          backgroundColor: Color(0xffF6F6F6),
+          appBar: AppBar(
+            title: SvgPicture.asset('assets/images/logo.svg'),
+            actions: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15.w),
+                child: InkWell (onTap: () {
+                  navigateTo(context, NotificationScreen());
+                },child: Icon(Icons.notifications)),
+              ),
+            ],
           ),
-        ],
-      ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: size.width * 0.03),
-        child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
-          child: Column(
+          body:  BlocBuilder<AllLevelsCubit,AllLevelsState>(
+            builder: (context, state) {
+              if(state is GetAllLevelsLoading ||cubit.levelsModel ==null){
+                return Center(child: CircularProgressIndicator.adaptive());
+              }
+            return Padding(
+              padding: EdgeInsets.symmetric(horizontal: size.width * 0.03),
+              child: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
+                child: Column(
 
-            children: [
-              Container(
-                width: size.width,
-                height: 180,
-                child: CarouselSlider(
-                  options: CarouselOptions(
-                    enlargeCenterPage: true,
-                    enableInfiniteScroll: true,
-                    autoPlay: true,
-                    viewportFraction: 0.9,
-                    autoPlayCurve: Curves.fastOutSlowIn,
-                    enlargeStrategy: CenterPageEnlargeStrategy.scale,
-                    disableCenter: true,
-                  ),
-                  items: [
-                    Stack(
-                      children: [
-                        Image.asset(
-                          'assets/images/home.png',
+                  children: [
+                    Container(
+                      width: size.width,
+                      height: 180,
+                      child: CarouselSlider(
+                        options: CarouselOptions(
+                          enlargeCenterPage: true,
+                          enableInfiniteScroll: true,
+                          autoPlay: true,
+                          viewportFraction: 0.9,
+                          autoPlayCurve: Curves.fastOutSlowIn,
+                          enlargeStrategy: CenterPageEnlargeStrategy.scale,
+                          disableCenter: true,
                         ),
-                        Positioned(
-                          child: Center(
-                            child: Column(
-                              children: [
-                                Text(
-                                  'SAVE UP',
-                                  style: TextStyle(
-                                    fontSize: 12.sp,
-                                    fontWeight: FontWeight.w600,
-                                    color: Color(0xff484848),
+                        items: [
+                          Stack(
+                            children: [
+                              Image.asset(
+                                'assets/images/home.png',
+                              ),
+                              Positioned(
+                                child: Center(
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        'SAVE UP',
+                                        style: TextStyle(
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.w600,
+                                          color: Color(0xff484848),
+                                        ),
+                                      ),
+                                      Text(
+                                        'On Level 1',
+                                        style: TextStyle(
+                                          fontSize: 21.sp,
+                                          fontWeight: FontWeight.w600,
+                                          color: Color(0xff484848),
+                                        ),
+                                      ),
+                                      Text(
+                                        'Get 20% off with your invite',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 16.sp,
+                                          fontWeight: FontWeight.w600,
+                                          color: Color(0xff007AFF),
+                                        ),
+                                      ),
+                                      DefaultAppButton(
+                                          onTap: () {},
+                                          height: 36.h,
+                                          width: 126.w,
+                                          btnTitle: 'Invite')
+                                    ],
                                   ),
                                 ),
-                                Text(
-                                  'On Level 1',
-                                  style: TextStyle(
-                                    fontSize: 21.sp,
-                                    fontWeight: FontWeight.w600,
-                                    color: Color(0xff484848),
-                                  ),
-                                ),
-                                Text(
-                                  'Get 20% off with your invite',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.w600,
-                                    color: Color(0xff007AFF),
-                                  ),
-                                ),
-                                DefaultAppButton(
-                                    onTap: () {},
-                                    height: 36.h,
-                                    width: 126.w,
-                                    btnTitle: 'Invite')
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
+                        ],
+                      ),
+                    ),
+
+                    ///---------------End Carusal Slider---------
+                    SizedBox(
+                      height: size.height * 0.02,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          locale!.liveLectures.toString(),
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w700),
                         ),
                       ],
                     ),
+                    SizedBox(
+                      height: size.height * 0.02,
+                    ),
+                    Image.asset('assets/images/video.png'),
+                    SizedBox(
+                      height: size.height * 0.03,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          locale.levels.toString(),
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w700),
+                        ),
+                        Text(
+                          locale.seeAll.toString(),
+                          style: TextStyle(
+                              color: Color(0xff007AFF),
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w700),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: size.height * 0.03,
+                    ),
+                    SizedBox(
+                      height: size.height/1.3,
+                      child: ListView.separated(
+                          scrollDirection: Axis.vertical,
+                          itemBuilder: (context, index) {
+                            return listOfLevels(locale,context,cubit.levelsModel!.data![index].name.toString());
+                          },
+                          separatorBuilder: (context, index) {
+                            return Divider();
+                          },
+                          itemCount: 5),
+                    )
                   ],
                 ),
               ),
-
-              ///---------------End Carusal Slider---------
-              SizedBox(
-                height: size.height * 0.02,
-              ),
-              Row(
-                children: [
-                  Text(
-                    locale!.liveLectures.toString(),
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w700),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: size.height * 0.02,
-              ),
-              Image.asset('assets/images/video.png'),
-              SizedBox(
-                height: size.height * 0.03,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    locale.levels.toString(),
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w700),
-                  ),
-                  Text(
-                    locale.seeAll.toString(),
-                    style: TextStyle(
-                        color: Color(0xff007AFF),
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w700),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: size.height * 0.03,
-              ),
-              SizedBox(
-                height: size.height/1.3,
-                child: ListView.separated(
-                    scrollDirection: Axis.vertical,
-                    itemBuilder: (context, index) {
-                      return listOfLevels(locale,context);
-                    },
-                    separatorBuilder: (context, index) {
-                      return Divider();
-                    },
-                    itemCount: 5),
-              )
-            ],
+            );
+            },
           ),
-        ),
-      ),
-    );
+        );
+      }
   }
-}
 
-Widget listOfLevels(locale,context) => Container(
+
+Widget listOfLevels(locale,context,String levelName) => Container(
   decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(8),
       color: Colors.white
@@ -183,7 +195,8 @@ Widget listOfLevels(locale,context) => Container(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Level One',
+                  levelName,
+                  textAlign: TextAlign.start,
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 16.sp,

@@ -17,6 +17,7 @@ import '../../../../core/validation/form_validator.dart';
 import '../../../../language/locale.dart';
 import '../../../../provider/auth_cubit/auth_cubit.dart';
 import '../../../../provider/auth_cubit/auth_state.dart';
+import '../../home/home/home_screen.dart';
 import '../forget_password/change_password.dart';
 
 class Login extends StatefulWidget {
@@ -173,16 +174,13 @@ class _LoginState extends State<Login> {
                   }
                   if (state is AuthLoaded) {
                     if (_formKey.currentState!.validate()) {
-                      //  HiveHelper().getData('number') == 1
-                      //      ? Navigator.of(context).pop(true)
-                      //      :
-                      // Navigator.pushAndRemoveUntil(
-                      //         context,
-                      //         MaterialPageRoute<void>(
-                      //             builder: (BuildContext context) =>
-                      //                 const Home()
-                      //         ),
-                      //         (route) => false);
+                      Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute<void>(
+                                  builder: (BuildContext context) =>
+                                      const HomeScreen()
+                              ),
+                              (route) => false);
                     }
                   }
                 },

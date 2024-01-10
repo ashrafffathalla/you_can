@@ -25,8 +25,8 @@ class LoginRepositories {
         },
       );
       var data = jsonDecode(response.data) as Map<String, dynamic>;
-      // String token = data['data']["token"];
-      // await hiveHelper.putData("token", token);
+      String token = data["token"];
+      await hiveHelper.putData("token", token);
       return response;
     } on DioException catch (dioError) {
       var error = jsonDecode(dioError.response!.data) as Map<String, dynamic>;

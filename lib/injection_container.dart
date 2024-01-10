@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:you_can/provider/auth_cubit/auth_cubit.dart';
+import 'package:you_can/provider/levelsCubit/levelsCubit.dart';
 import 'package:you_can/repositories/auth_repositories/forget_pass_repositories.dart';
 import 'package:you_can/repositories/auth_repositories/login_repositories.dart';
 import 'package:you_can/repositories/auth_repositories/sign_up_repositories.dart';
+import 'package:you_can/repositories/levelsRepositories/levels_repostories.dart';
 import 'core/constant/apis.dart';
 import 'core/localization/language_cubit.dart';
 import 'data/local/hiva_helper.dart';
@@ -18,6 +20,10 @@ Future<void> init() async {
       loginRepositories: getIt(),
       signUpRepositories: getIt(),
       forgetPassRepositories: getIt())
+  );
+  getIt.registerFactory(() => AllLevelsCubit(
+    repositories: getIt(),
+      )
   );
   // getIt.registerFactory(() => RentCarCubit(
   //       searchRepositories: getIt(),
@@ -49,6 +55,8 @@ Future<void> init() async {
   // // Repository
   getIt.registerLazySingleton(
       () => LoginRepositories(dioHelper: getIt(), hiveHelper: getIt()));
+  getIt.registerLazySingleton(
+          () => LevelsRepositories(dioHelper: getIt(), hiveHelper: getIt()));
   getIt.registerLazySingleton(
       () => SignUpRepositories(dioHelper: getIt(), hiveHelper: getIt()));
   getIt.registerLazySingleton(
