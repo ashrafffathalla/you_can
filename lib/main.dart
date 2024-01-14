@@ -14,6 +14,8 @@ import 'package:you_can/view/pages/auth/welcomeScreen/selectAccountType.dart';
 import 'package:you_can/view/pages/auth/welcomeScreen/welcomAuth.dart';
 import 'package:you_can/view/pages/home/lectures/lessonsScreen/inside_screens/lessonVideo/lessonVideo.dart';
 import 'package:you_can/view/pages/home/sessions/sessionsScreen/inside_screens/sessionVideo/sessionVideo.dart';
+import 'package:you_can/view/pages/home/zoom2.dart';
+import 'package:you_can/view/pages/home/zoomMeeting.dart';
 import 'package:you_can/view/pages/splash_screen/splash_screen.dart';
 import 'core/localization/language_cubit.dart';
 import 'core/size_config/size_config.dart';
@@ -74,7 +76,8 @@ class MyApp extends StatelessWidget {
                 locale: locale,
                 theme: lightTheme(),
                 themeMode: ThemeMode.system,
-                 home: SplashScreen(),
+                 home: ZoomMeetingPage(meetingLink:'https://us05web.zoom.us/j/86954694052?pwd=V6ForYywdaici6BLzyeaorxe1qDoai.1'),
+                 // home: SplashScreen(),
                 debugShowCheckedModeBanner: false,
               );
             },
