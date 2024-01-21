@@ -73,6 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: Center(
                                   child: Column(
                                     children: [
+                                      SizedBox(height: size.height*0.02,),
                                       Text(
                                         'SAVE UP',
                                         style: TextStyle(
@@ -98,6 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           color: Color(0xff007AFF),
                                         ),
                                       ),
+                                      SizedBox(height: size.height*0.01,),
                                       DefaultAppButton(
                                           onTap: () {},
                                           height: 36.h,
@@ -117,29 +119,26 @@ class _HomeScreenState extends State<HomeScreen> {
                     SizedBox(
                       height: size.height * 0.02,
                     ),
-                    Row(
-                      children: [
-                        Text(
-                          locale!.liveLectures.toString(),
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w700),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: size.height * 0.02,
-                    ),
-                    Image.asset('assets/images/video.png'),
-                    SizedBox(
-                      height: size.height * 0.03,
-                    ),
+                    // Row(
+                    //   children: [
+                    //     Text(
+                    //       locale!.liveLectures.toString(),
+                    //       style: TextStyle(
+                    //           color: Colors.black,
+                    //           fontSize: 16.sp,
+                    //           fontWeight: FontWeight.w700),
+                    //     ),
+                    //   ],
+                    // ),
+                    // SizedBox(
+                    //   height: size.height * 0.02,
+                    // ),
+                    // Image.asset('assets/images/video.png'),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          locale.levels.toString(),
+                          locale!.levels.toString(),
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 16.sp,
@@ -160,12 +159,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     SizedBox(
                       height: size.height/1.3,
                       child: ListView.separated(
+                        physics:NeverScrollableScrollPhysics(),
                           scrollDirection: Axis.vertical,
                           itemBuilder: (context, index) {
                             return listOfLevels(locale,context,cubit.levelsModel!.data![index].name.toString());
                           },
                           separatorBuilder: (context, index) {
-                            return Divider();
+                            return Divider(
+                              color: Colors.transparent,
+                            );
                           },
                           itemCount: 5),
                     )
@@ -202,7 +204,7 @@ Widget listOfLevels(locale,context,String levelName) => Container(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w600),
                 ),
-                Text(locale!.liveLectures.toString(), style: TextStyle(color: Color(0xff7D7D7D), fontSize: 13.sp, fontWeight: FontWeight.w500),),
+                Text(locale!.liveLectures.toString(), textAlign: TextAlign.start, style: TextStyle(color: Color(0xff7D7D7D), fontSize: 13.sp, fontWeight: FontWeight.w500),),
               ],
             ),
           ),

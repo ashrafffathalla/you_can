@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:you_can/view/pages/auth/login/autth_view.dart';
 import 'package:you_can/view/pages/home/home/home_screen.dart';
-import '../../../core/localization/check_local.dart';
 import '../../../core/size_config/size_config.dart';
 import '../../../data/local/hiva_helper.dart';
 
@@ -20,7 +19,6 @@ class _SplashScreenState extends State<SplashScreen>  with SingleTickerProviderS
   @override
   void initState() {
     super.initState();
-    print(token.toString()+"GGG");
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 2),
