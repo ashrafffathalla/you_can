@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:you_can/language/locale.dart';
 import 'package:you_can/provider/levelsCubit/levelsCubit.dart';
 import 'package:you_can/provider/levelsCubit/levelsStates.dart';
 import 'package:you_can/shared/shared_commponents/commponents.dart';
+import 'package:you_can/view/pages/home/lectures/lessonsScreen/lessons.dart';
 import 'package:you_can/view/widgets/defaultBtn.dart';
+import '../../../../shared/shammer_widget.dart';
 import 'notification/notification_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -41,14 +44,17 @@ class _HomeScreenState extends State<HomeScreen> {
           body:  BlocBuilder<AllLevelsCubit,AllLevelsState>(
             builder: (context, state) {
               if(state is GetAllLevelsLoading ||cubit.levelsModel ==null){
-                return Center(child: CircularProgressIndicator.adaptive());
+                return   Shimmer.fromColors(
+                  baseColor: Colors.grey[300]!,
+                  highlightColor: Colors.grey[100]!,
+                  child: LoadingShimmerWidget(),
+                );
               }
             return Padding(
               padding: EdgeInsets.symmetric(horizontal: size.width * 0.03),
               child: SingleChildScrollView(
                 physics: BouncingScrollPhysics(),
                 child: Column(
-
                   children: [
                     Container(
                       width: size.width,
@@ -104,7 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           onTap: () {},
                                           height: 36.h,
                                           width: 126.w,
-                                          btnTitle: 'Invite')
+                                          btnTitle: 'Invite'),
                                     ],
                                   ),
                                 ),
@@ -162,7 +168,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         physics:NeverScrollableScrollPhysics(),
                           scrollDirection: Axis.vertical,
                           itemBuilder: (context, index) {
-                            return listOfLevels(locale,context,cubit.levelsModel!.data![index].name.toString());
+                            return GestureDetector(
+                                onTap: () {
+                                  navigateTo(context, LessonsScreen());
+                                },
+                                child: listOfLevels(locale,context,cubit.levelsModel!.data![index].name.toString()));
                           },
                           separatorBuilder: (context, index) {
                             return Divider(

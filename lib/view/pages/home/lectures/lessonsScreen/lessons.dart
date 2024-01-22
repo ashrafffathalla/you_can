@@ -7,7 +7,11 @@ import 'inside_screens/lessonVideo/lessonVideo.dart';
 
 class LessonsScreen extends StatelessWidget {
   const LessonsScreen({super.key});
-
+  // Shimmer.fromColors(
+  // baseColor: Colors.grey[300]!,
+  // highlightColor: Colors.grey[100]!,
+  // child: LoadingShimmerWidget(),
+  // ),
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -34,16 +38,18 @@ class LessonsScreen extends StatelessWidget {
                   navigateTo(context, LessonVideoScreen());
                 },
                 child: SizedBox(
-                  height: size.height/1.3,
+                  height: size.height/1.2,
                   child: ListView.separated(
                       scrollDirection: Axis.vertical,
                       itemBuilder: (context, index) {
                         return ListLevelsScreen(title: '${index+1}: '+'Lesson Name',image: index ==2 ||index ==1?'assets/images/play.svg':'assets/images/complete.svg',subTitle: 'It takes 32 mins to complete ',);
                       },
                       separatorBuilder: (context, index) {
-                        return Divider();
+                        return Divider(
+                          color: Colors.transparent,
+                        );
                       },
-                      itemCount: 12),
+                      itemCount: 8),
                 ),
               )
             ],
