@@ -13,47 +13,6 @@ class LoadingShimmerWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Shimmer.fromColors(
-                baseColor: Colors.grey[300]!,
-                highlightColor:
-                    Theme.of(context).colorScheme.primary.withOpacity(0.2),
-                child: Row(
-                  children: [
-                    Container(
-                      width: 50.w,
-                      height: 50.h,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(
-                            25), // 25 is half of min(50.w, 50.h)
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10.w,
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Container(
-                          width: 80.w,
-                          height: 11.h,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(25)),
-                        ),
-                        SizedBox(height: 8.h),
-                        Container(
-                          width: 80.w,
-                          height: 11.h,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(25)),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
               SizedBox(height: 28.h),
               Shimmer.fromColors(
                 baseColor: Colors.grey[300]!,

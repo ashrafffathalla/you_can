@@ -15,3 +15,14 @@ class GetAllLevelsError extends AllLevelsState {
   @override
   List<Object> get props => [error];
 }
+///----------Lessons-----------------
+///--------------------
+///--------------------
+class GetAllLessonsLoading extends AllLevelsState {}
+class GetAllLessonsLoaded extends AllLevelsState {}
+class GetAllLessonsError extends AllLevelsState {
+  final String error;
+  const GetAllLessonsError({required this.error});
+  @override
+  List<Object> get props => [error];
+}

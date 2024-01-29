@@ -13,4 +13,5 @@ class AutomationApi {
 
 //**************** LEVELS *******************//
   static const levels = baseUrl + "/student/api/levels"; //get
+  static const lessonsInLevels = baseUrl + "/student/api/levels/lesson/"; //get
 }

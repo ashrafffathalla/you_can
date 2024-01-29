@@ -11,7 +11,13 @@ import 'package:you_can/view/widgets/defaultBtn.dart';
 import 'draggable_exame_screen.dart';
 
 class AssignmentScreen extends StatefulWidget {
-  const AssignmentScreen({super.key});
+  const AssignmentScreen({super.key,
+     this.choice,
+     this.isSelected,
+     this.onSelect,});
+  final String? choice;
+  final bool? isSelected;
+  final VoidCallback ? onSelect;
 
   @override
   State<AssignmentScreen> createState() => _AssignmentScreenState();

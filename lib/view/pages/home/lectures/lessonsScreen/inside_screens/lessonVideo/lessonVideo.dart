@@ -1,38 +1,62 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:video_player/video_player.dart';
 import 'package:appinio_video_player/appinio_video_player.dart';
+import 'package:you_can/data/model/lessonsByLevelModel.dart';
 import 'package:you_can/language/locale.dart';
 import 'package:you_can/shared/shared_commponents/commponents.dart';
 import 'package:you_can/view/pages/home/layout.dart';
 import 'package:you_can/view/pages/home/lectures/lessonsScreen/inside_screens/lessonVideo/assignment.dart';
 import 'package:you_can/view/pages/home/lectures/lessonsScreen/inside_screens/lessonVideo/captionScreen.dart';
 import 'package:you_can/view/pages/home/lectures/lessonsScreen/inside_screens/lessonVideo/comments.dart';
+import 'package:you_can/view/homeWork.dart';
 
-import '../../../../../../../core/localization/check_local.dart';
+import '../../../../../../../provider/levelsCubit/levelsCubit.dart';
+/*
+  Shimmer.fromColors(
+                baseColor: Colors.grey[300]!,
+                highlightColor: Colors.grey[100]!,
+                child: Container(
+                  width: 292.w,
+                  height: 138.h,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(25.sp)),
+                ),
+              ),
+ */
 
 class LessonVideoScreen extends StatefulWidget {
-  const LessonVideoScreen({super.key});
-
+   LessonVideoScreen({super.key,this.assignments,this.caption,this.comments,this.lessonName,this.LessonNumber,this.teacher,this.video});
+  String? lessonName;
+  String? LessonNumber;
+  String? teacher ;
+  String? caption;
+  List? comments;
+  List ?assignments;
+  dynamic video;
   @override
   State<LessonVideoScreen> createState() => _LessonVideoScreenState();
 }
 
 class _LessonVideoScreenState extends State<LessonVideoScreen> {
    CustomVideoPlayerController? _customVideoPlayerController;
-   VideoPlayerController? videoPlayerController;
+   late VideoPlayerController? videoPlayerController;
+   late bool isVideoInitialized = false;
 
 
   @override
   void initState() {
     super.initState();
-    initializeVideoPlayer();
+    initializeVideoPlayer(widget.video);
   }
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final locale = AppLocalizations.of(context);
+    final cubit = BlocProvider.of<AllLevelsCubit>(context);
     return DefaultTabController(
       length: 3,
       child: Stack(
@@ -40,10 +64,21 @@ class _LessonVideoScreenState extends State<LessonVideoScreen> {
           Scaffold(
             appBar: AppBar(),
             body: SingleChildScrollView(
+              physics: NeverScrollableScrollPhysics(),
               child: Column(
                 children: [
                   Container(
-                    child: CustomVideoPlayer(customVideoPlayerController: _customVideoPlayerController!),
+                    child:isVideoInitialized?CustomVideoPlayer(customVideoPlayerController: _customVideoPlayerController!):Shimmer.fromColors(
+                      baseColor: Colors.grey[300]!,
+                      highlightColor: Colors.grey[100]!,
+                      child: Container(
+                        width: size.width,
+                        height: 200.h,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(0.sp)),
+                      ),
+                    ),
                   ),
                   SizedBox(
                     height: size.height*0.02,
@@ -57,7 +92,7 @@ class _LessonVideoScreenState extends State<LessonVideoScreen> {
                         ),
                         Row(
                           children: [
-                            Text('Introduction to Grammar',
+                            Text(widget.lessonName.toString(),
                               style: TextStyle(
                                 fontSize: 18.sp,
                                 fontWeight: FontWeight.w700,
@@ -73,7 +108,7 @@ class _LessonVideoScreenState extends State<LessonVideoScreen> {
                               color: Color(0xff33C558).withOpacity(0.2),
                               child: Padding(
                                 padding:  EdgeInsets.symmetric(horizontal: 3.w),
-                                child: Text('LEVEL 1',style: TextStyle(
+                                child: Text('LEVEL ${widget.LessonNumber}',style: TextStyle(
                                   fontSize: 14.sp,
                                   fontWeight: FontWeight.w600,
                                   color: Color(0XFF33C558),
@@ -87,7 +122,7 @@ class _LessonVideoScreenState extends State<LessonVideoScreen> {
                                 fontWeight: FontWeight.w700,
                               ),),
                             ),
-                            Text('Mr. Anas Mohamed',style: TextStyle(
+                            Text('Mr. ${widget.teacher!}',style: TextStyle(
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w600,
                               color: Color(0XFF0060D2),
@@ -125,9 +160,7 @@ class _LessonVideoScreenState extends State<LessonVideoScreen> {
                         tabs: [
                           Center(child: Text('Caption',style: TextStyle(fontWeight: FontWeight.w600,fontSize: 16.sp),)),
                           Center(child: Text('Comments',style: TextStyle(fontWeight: FontWeight.w600,fontSize: 16.sp),)),
-                          GestureDetector(onTap: () {
-                            navigateTo(context, AssignmentScreen());
-                          },child: Center(child: Text("Assignment",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 16.sp),))),
+                          Center(child: Text("Assignment",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 16.sp),)),
 
                         ],
                       ),
@@ -139,10 +172,10 @@ class _LessonVideoScreenState extends State<LessonVideoScreen> {
                     child: TabBarView(
                       physics: NeverScrollableScrollPhysics(),
                       children: [
-                        CaptionScreen(),
-                        CommentsScreen(),
-                        // AssignmentScreen(),
-                        Container(),
+                        CaptionScreen(caption: widget.caption!),
+                        CommentsScreen(comments: widget.comments!),
+                        QuestionScreen(),
+                        // Container(),
                       ],
                     ),
                   )
@@ -155,13 +188,13 @@ class _LessonVideoScreenState extends State<LessonVideoScreen> {
     );
   }
 
-  void initializeVideoPlayer() {
+  void initializeVideoPlayer(String video) {
     VideoPlayerController _videoPlayerController;
-    _videoPlayerController = VideoPlayerController.networkUrl(Uri.parse(
-        "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4"))
+    _videoPlayerController = VideoPlayerController.networkUrl(Uri.parse(video),
+    )
       ..initialize().then((value) {
         setState(() {
-
+          isVideoInitialized = true;
         });
       });
     _customVideoPlayerController = CustomVideoPlayerController(context: context, videoPlayerController: _videoPlayerController);

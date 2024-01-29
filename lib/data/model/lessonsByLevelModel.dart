@@ -14,6 +14,14 @@ class LessonsByLevelModel {
     }
   }
 
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['count'] = this.count;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
 }
 
 class Data {
@@ -23,10 +31,10 @@ class Data {
   String? duration;
   Level? level;
   Teacher? teacher;
-  List<Null>? comments;
-  List<Null>? voices;
+  List<Comments>? comments;
+  // List<Voices>? voices;
   int? assignmentsCount;
-  List<Null>? assignments;
+  List<Assignments>? assignments;
   List<Media>? media;
   bool? isActive;
 
@@ -38,7 +46,7 @@ class Data {
         this.level,
         this.teacher,
         this.comments,
-        this.voices,
+        // this.voices,
         this.assignmentsCount,
         this.assignments,
         this.media,
@@ -53,22 +61,22 @@ class Data {
     teacher =
     json['teacher'] != null ? new Teacher.fromJson(json['teacher']) : null;
     if (json['comments'] != null) {
-      comments = <Null>[];
+      comments = <Comments>[];
       json['comments'].forEach((v) {
-        comments!.add(new Null.fromJson(v));
+        comments!.add(new Comments.fromJson(v));
       });
     }
-    if (json['voices'] != null) {
-      voices = <Null>[];
-      json['voices'].forEach((v) {
-        voices!.add(new Null.fromJson(v));
-      });
-    }
+    // if (json['voices'] != null) {
+    //   voices = <Null>[];
+    //   json['voices'].forEach((v) {
+    //     voices!.add(new Null.fromJson(v));
+    //   });
+    // }
     assignmentsCount = json['assignments_count'];
     if (json['assignments'] != null) {
-      assignments = <Null>[];
+      assignments = <Assignments>[];
       json['assignments'].forEach((v) {
-        assignments!.add(new Null.fromJson(v));
+        assignments!.add(new Assignments.fromJson(v));
       });
     }
     if (json['media'] != null) {
@@ -80,6 +88,34 @@ class Data {
     isActive = json['is_active'];
   }
 
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['title'] = this.title;
+    data['description'] = this.description;
+    data['duration'] = this.duration;
+    if (this.level != null) {
+      data['level'] = this.level!.toJson();
+    }
+    if (this.teacher != null) {
+      data['teacher'] = this.teacher!.toJson();
+    }
+    if (this.comments != null) {
+      data['comments'] = this.comments!.map((v) => v.toJson()).toList();
+    }
+    // if (this.voices != null) {
+    //   data['voices'] = this.voices!.map((v) => v.toJson()).toList();
+    // }
+    data['assignments_count'] = this.assignmentsCount;
+    if (this.assignments != null) {
+      data['assignments'] = this.assignments!.map((v) => v.toJson()).toList();
+    }
+    if (this.media != null) {
+      data['media'] = this.media!.map((v) => v.toJson()).toList();
+    }
+    data['is_active'] = this.isActive;
+    return data;
+  }
 }
 
 class Level {
@@ -144,6 +180,123 @@ class Teacher {
     data['code'] = this.code;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
+    return data;
+  }
+}
+
+class Comments {
+  int? id;
+  Student? student;
+  String? body;
+
+  Comments({this.id, this.student, this.body});
+
+  Comments.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    student =
+    json['student'] != null ? new Student.fromJson(json['student']) : null;
+    body = json['body'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    if (this.student != null) {
+      data['student'] = this.student!.toJson();
+    }
+    data['body'] = this.body;
+    return data;
+  }
+}
+
+class Student {
+  int? id;
+  String? fullName;
+  String? birthDate;
+  String? phone;
+  String? code;
+  String? createdAt;
+  String? updatedAt;
+
+  Student(
+      {this.id,
+        this.fullName,
+        this.birthDate,
+        this.phone,
+        this.code,
+        this.createdAt,
+        this.updatedAt});
+
+  Student.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    fullName = json['full_name'];
+    birthDate = json['birth_date'];
+    phone = json['phone'];
+    code = json['code'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['full_name'] = this.fullName;
+    data['birth_date'] = this.birthDate;
+    data['phone'] = this.phone;
+    data['code'] = this.code;
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
+    return data;
+  }
+}
+
+class Assignments {
+  int? id;
+  String? question;
+  List<Answers>? answers;
+
+  Assignments({this.id, this.question, this.answers});
+
+  Assignments.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    question = json['question'];
+    if (json['answers'] != null) {
+      answers = <Answers>[];
+      json['answers'].forEach((v) {
+        answers!.add(new Answers.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['question'] = this.question;
+    if (this.answers != null) {
+      data['answers'] = this.answers!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Answers {
+  int? id;
+  String? answer;
+  int? correctAnswer;
+
+  Answers({this.id, this.answer, this.correctAnswer});
+
+  Answers.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    answer = json['answer'];
+    correctAnswer = json['correct_answer'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['answer'] = this.answer;
+    data['correct_answer'] = this.correctAnswer;
     return data;
   }
 }

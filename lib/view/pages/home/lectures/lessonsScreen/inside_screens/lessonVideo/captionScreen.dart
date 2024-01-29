@@ -3,7 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:you_can/language/locale.dart';
 
 class CaptionScreen extends StatelessWidget {
-  const CaptionScreen({super.key});
+   CaptionScreen({super.key,required this.caption});
+  String caption;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class CaptionScreen extends StatelessWidget {
         color: Colors.white,
         child: Column(
           children: [
-            Text('Lorem ipsum dolor sit amet consectetur. Mauris nibh suspendisse facilisis fermentum amet dignissim. Proin duis sodales urna lacus at dui. Bibendum quam amet quam aliquet mauris orci. Et lacus gravida ligula euismod sed semper auctor. Amet eu sit massa quis convallis.Lorem ipsum dolor sit amet consectetur. Mauris nibh suspendisse facilisis fermentum amet dignissim. Proin duis sodales urna lacus at dui.',
+            Text(caption,
               style: TextStyle(
 
                 fontSize: 14.sp

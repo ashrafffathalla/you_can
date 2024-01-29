@@ -4,8 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:you_can/language/locale.dart';
 
 class CommentsScreen extends StatefulWidget {
-  const CommentsScreen({super.key});
-
+   CommentsScreen({super.key, this.comments});
+   List ?comments;
   @override
   State<CommentsScreen> createState() => _CommentsScreenState();
 }
@@ -20,36 +20,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
       'message': 'I love to code',
       'date': '2021-01-01 12:00:00'
     },
-    {
-      'name': 'Chuks Okwuenu',
-      'pic': 'assets/images/person.png',
-      'message': 'I love to code',
-      'date': '2021-01-01 12:00:00'
-    },
-    {
-      'name': 'Biggi Man',
-      'pic': 'assets/images/person.png',
-      'message': 'Very cool',
-      'date': '2021-01-01 12:00:00'
-    },
-    {
-      'name': 'Tunde Martins',
-      'pic': 'assets/images/person.png',
-      'message': 'Very cool',
-      'date': '2021-01-01 12:00:00'
-    },
-    {
-      'name': 'Biggi Man',
-      'pic': 'assets/images/person.png',
-      'message': 'Very cool',
-      'date': '2021-01-01 12:00:00'
-    },
-    {
-      'name': 'Biggi Man',
-      'pic': 'assets/images/person.png',
-      'message': 'Very cool',
-      'date': '2021-01-01 12:00:00'
-    },
+
   ];
   @override
   Widget build(BuildContext context) {

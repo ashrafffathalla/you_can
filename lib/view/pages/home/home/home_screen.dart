@@ -79,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: Center(
                                   child: Column(
                                     children: [
-                                      SizedBox(height: size.height*0.02,),
+                                      SizedBox(height: size.height*0.01,),
                                       Text(
                                         'SAVE UP',
                                         style: TextStyle(
@@ -105,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           color: Color(0xff007AFF),
                                         ),
                                       ),
-                                      SizedBox(height: size.height*0.01,),
+                                      SizedBox(height: size.height*0.005,),
                                       DefaultAppButton(
                                           onTap: () {},
                                           height: 36.h,
@@ -169,8 +169,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           scrollDirection: Axis.vertical,
                           itemBuilder: (context, index) {
                             return GestureDetector(
-                                onTap: () {
-                                  navigateTo(context, LessonsScreen());
+                                onTap: () async{
+                                   cubit.getAllLessons(index);
+                                   navigateTo(context, LessonsScreen(
+                                    levelName: cubit.levelsModel!.data![index].name.toString(),
+                                  ));
                                 },
                                 child: listOfLevels(locale,context,cubit.levelsModel!.data![index].name.toString()));
                           },

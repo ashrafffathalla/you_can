@@ -25,7 +25,9 @@ class LecturesScreen extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () {
-                  navigateTo(context, LessonsScreen());
+                  navigateTo(context, LessonsScreen(
+
+                  ));
                 },
                 child: SizedBox(
                   height: size.height/1.3,

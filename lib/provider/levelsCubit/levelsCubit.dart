@@ -3,14 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:you_can/provider/levelsCubit/levelsStates.dart';
 
 import '../../data/model/LevelsModel.dart';
+import '../../data/model/lessonsByLevelModel.dart';
 import '../../repositories/levelsRepositories/levels_repostories.dart';
 
 class AllLevelsCubit extends Cubit<AllLevelsState> {
   AllLevelsCubit({required this.repositories}) : super(GetAllLevelsInitial());
   static AllLevelsCubit get(context) => BlocProvider.of(context);
   final LevelsRepositories repositories;
-
+   /// -------------------------------------------
   ///----------Get All Orders -----------------
+  ///-------------------------------------
   LevelsModel? levelsModel;
   getAllLevels() async {
     emit(GetAllLevelsLoading());
@@ -21,5 +23,18 @@ class AllLevelsCubit extends Cubit<AllLevelsState> {
       emit(GetAllLevelsError(error: e.toString()));
     }
   }
+///------------------------
+///--------Get Level Lessons----------
+///----------------------------
 
+  LessonsByLevelModel? lessonsByLevelModel;
+  getAllLessons(int id) async {
+    emit(GetAllLessonsLoading());
+    try {
+      lessonsByLevelModel = await repositories.allLessonsInLevelRepositories(id);
+      emit(GetAllLessonsLoaded());
+    } catch (e) {
+      emit(GetAllLessonsError(error: e.toString()));
+    }
+  }
 }
