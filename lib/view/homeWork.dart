@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:you_can/language/locale.dart';
 
+import '../provider/levelsCubit/levelsCubit.dart';
+
 class QuestionScreen extends StatefulWidget {
+  QuestionScreen({super.key,this.assignments,});
+  dynamic assignments;
+
   @override
   _QuestionScreenState createState() => _QuestionScreenState();
 }
@@ -13,6 +19,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final locale = AppLocalizations.of(context);
+    final cubit = BlocProvider.of<AllLevelsCubit>(context);
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: SingleChildScrollView(
@@ -51,11 +58,12 @@ class _QuestionScreenState extends State<QuestionScreen> {
                 });
               },
             ),
-            SizedBox(height: 16),
+
             Text(
               'Selected Answer: $selectedAnswer',
               style: TextStyle(fontSize: 16),
             ),
+            SizedBox(height: 16),
           ],
         ),
       ),

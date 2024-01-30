@@ -160,7 +160,7 @@ class _LessonVideoScreenState extends State<LessonVideoScreen> {
                         tabs: [
                           Center(child: Text('Caption',style: TextStyle(fontWeight: FontWeight.w600,fontSize: 16.sp),)),
                           Center(child: Text('Comments',style: TextStyle(fontWeight: FontWeight.w600,fontSize: 16.sp),)),
-                          Center(child: Text("Assignment",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 16.sp),)),
+                          Center(child: FittedBox(child: Text("Assignment",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 16.sp),))),
 
                         ],
                       ),
@@ -174,7 +174,7 @@ class _LessonVideoScreenState extends State<LessonVideoScreen> {
                       children: [
                         CaptionScreen(caption: widget.caption!),
                         CommentsScreen(comments: widget.comments!),
-                        QuestionScreen(),
+                        QuestionScreen(assignments: widget.assignments,),
                         // Container(),
                       ],
                     ),

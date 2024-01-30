@@ -3,6 +3,7 @@ import 'package:you_can/view/pages/auth/login/autth_view.dart';
 import 'package:you_can/view/pages/home/home/home_screen.dart';
 import '../../../core/size_config/size_config.dart';
 import '../../../data/local/hiva_helper.dart';
+import '../home/layout.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -21,18 +22,18 @@ class _SplashScreenState extends State<SplashScreen>  with SingleTickerProviderS
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 2),
+      duration: const Duration(seconds: 1),
     );
     _opacityAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(_animationController);
 
     _animationController.forward();
     if (token != null) {
-      startWidget = const HomeScreen();
+      startWidget = const LayoutScreen();
     } else {
       startWidget = const AuthView();
     }
     Future.delayed(
-        const Duration(seconds: 1),
+        const Duration(seconds: 2),
         () => Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => startWidget),
@@ -53,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen>  with SingleTickerProviderS
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-        backgroundColor: const Color(0xff00B0B9),
+        backgroundColor:  Colors.white,
         body: Center(
           child: Padding(
             padding:  EdgeInsets.all(MediaQuery.of(context).size.width*0.08),

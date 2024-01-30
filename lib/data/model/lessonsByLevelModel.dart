@@ -1,7 +1,6 @@
 class LessonsByLevelModel {
   int? count;
   List<Data>? data;
-
   LessonsByLevelModel({this.count, this.data});
 
   LessonsByLevelModel.fromJson(Map<String, dynamic> json) {
