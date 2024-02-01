@@ -35,7 +35,7 @@ class LessonVideoScreen extends StatefulWidget {
   String? teacher ;
   String? caption;
   List? comments;
-  List ?assignments;
+   List<Assignments>?assignments;
   dynamic video;
   @override
   State<LessonVideoScreen> createState() => _LessonVideoScreenState();
@@ -141,9 +141,14 @@ class _LessonVideoScreenState extends State<LessonVideoScreen> {
                       padding:  EdgeInsets.all(8.0.sp),
                       child: TabBar(
                         onTap: (index){
+
                           // if(index==0){BlocProvider.of<OrdersCubit>(context).getOrdersData(state: "Pending");}
                           // if(index==1){BlocProvider.of<OrdersCubit>(context).getOrdersData(state: "NotCompleted");}
-                          // if(index==2){BlocProvider.of<OrdersCubit>(context).getOrdersData(state: "Completed");}
+                           if(index==2){
+                             print(index.toString()+"HHH");
+                             widget.assignments=cubit.lessonsByLevelModel!.data![0].assignments;
+
+                           }
                         },
                         padding: EdgeInsets.zero,
                         indicatorColor: Theme.of(context).colorScheme.primary,

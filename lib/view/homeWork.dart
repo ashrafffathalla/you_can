@@ -2,18 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:you_can/language/locale.dart';
 
+import '../data/model/lessonsByLevelModel.dart';
 import '../provider/levelsCubit/levelsCubit.dart';
 
 class QuestionScreen extends StatefulWidget {
   QuestionScreen({super.key,this.assignments,});
-  dynamic assignments;
+  List< Assignments>? assignments;
+
 
   @override
   _QuestionScreenState createState() => _QuestionScreenState();
 }
 
 class _QuestionScreenState extends State<QuestionScreen> {
+  int? selectedIndex;
   String selectedAnswer = '';
+  bool  isSelected = false;
+
 
   @override
   Widget build(BuildContext context) {
@@ -27,37 +32,61 @@ class _QuestionScreenState extends State<QuestionScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'What is your favorite color?',
+             widget.assignments![0].question.toString(),
               style: TextStyle(fontSize: 18),
             ),
             SizedBox(height: 16),
-            ChoiceContainer(
-              choice: 'Red',
-              isSelected: selectedAnswer == 'Red',
-              onSelect: () {
-                setState(() {
-                  selectedAnswer = 'Red';
-                });
-              },
+            SizedBox(
+              height: 200,
+              child: ListView.separated(itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: (){
+                    setState(() {
+                      selectedIndex = index;
+                    });
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.all(16),
+                    margin: EdgeInsets.only(bottom: 16),
+                    decoration: BoxDecoration(
+                      color: selectedIndex == index
+                          ? Theme.of(context).colorScheme.primary
+                          : Colors.white,
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(
+                        color: Colors.black,
+                        width: 1,
+                      ),
+                    ),
+                    child: Text(
+                      widget.assignments![0].answers![index].answer.toString(),
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: selectedIndex == index ? Colors.white : Colors.black,
+                      ),
+                    ),
+                  ),
+                );
+              }, separatorBuilder: (context, index) {
+                return SizedBox();
+              }, itemCount: widget.assignments![0].answers!.length),
             ),
-            ChoiceContainer(
-              choice: 'Blue',
-              isSelected: selectedAnswer == 'Blue',
-              onSelect: () {
-                setState(() {
-                  selectedAnswer = 'Blue';
-                });
-              },
-            ),
-            ChoiceContainer(
-              choice: 'Green',
-              isSelected: selectedAnswer == 'Green',
-              onSelect: () {
-                setState(() {
-                  selectedAnswer = 'Green';
-                });
-              },
-            ),
+
+/*
+ChoiceContainer(
+                  choice:widget.assignments![0].answers![index].answer.toString(),
+                  // isSelected: selectedAnswer == widget.assignments![0].answers![index],
+                  onSelect: () {
+                    setState(() {
+                      isSelected=true;
+                      selectedAnswer = widget.assignments![0].answers![index].answer.toString();
+                      print(isSelected.toString()+"HHH");
+                    });
+                  },
+
+                );
+ */
 
             Text(
               'Selected Answer: $selectedAnswer',
@@ -71,41 +100,3 @@ class _QuestionScreenState extends State<QuestionScreen> {
   }
 }
 
-class ChoiceContainer extends StatelessWidget {
-  final String choice;
-  final bool isSelected;
-  final VoidCallback onSelect;
-
-  const ChoiceContainer({
-    required this.choice,
-    required this.isSelected,
-    required this.onSelect,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onSelect,
-      child: Container(
-        width: double.infinity,
-        padding: EdgeInsets.all(16),
-        margin: EdgeInsets.only(bottom: 16),
-        decoration: BoxDecoration(
-          color: isSelected ? Colors.red : Colors.white,
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(
-            color: Colors.black,
-            width: 1,
-          ),
-        ),
-        child: Text(
-          choice,
-          style: TextStyle(
-            fontSize: 16,
-            color: isSelected ? Colors.white : Colors.black,
-          ),
-        ),
-      ),
-    );
-  }
-}

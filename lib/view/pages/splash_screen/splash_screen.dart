@@ -43,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen>  with SingleTickerProviderS
     //     () => Navigator.pushReplacement(
     //           context,
     //           MaterialPageRoute(builder: (context) =>const AuthView()),
-    //         ));
+    //));
   }
   @override
   void dispose() {
