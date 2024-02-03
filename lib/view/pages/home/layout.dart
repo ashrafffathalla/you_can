@@ -35,8 +35,8 @@ class _LayoutScreenState extends State<LayoutScreen> {
   @override
   void initState() {
 
-    super.initState();
     _controller = PersistentTabController(initialIndex: 0);
+    super.initState();
   }
 
   List<PersistentBottomNavBarItem> _navBarsItems() {
@@ -138,8 +138,8 @@ class _LayoutScreenState extends State<LayoutScreen> {
       extendBody: true,
       body: PersistentTabView(
         context,
-        onItemSelected: (index) => setState(() => _page = index),
         controller: _controller,
+        onItemSelected: (index) => setState(() => _page = index),
         screens: _buildScreens(),
         items: _navBarsItems(),
         confineInSafeArea: true,
