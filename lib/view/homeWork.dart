@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:you_can/core/helpers/helper_fun.dart';
 import 'package:you_can/language/locale.dart';
 import 'package:you_can/view/pages/home/lectures/lessonsScreen/inside_screens/lessonVideo/draggable_exame_screen.dart';
 import 'package:you_can/view/widgets/defaultBtn.dart';
@@ -26,6 +27,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
   String selectedAnswer = '';
   bool  isSelected = false;
   late FlutterTts flutterTts;
+  int ? currentAnswer;
   @override
   initState() {
     super.initState();
@@ -87,12 +89,13 @@ class _QuestionScreenState extends State<QuestionScreen> {
               ),
               SizedBox(height: 16),
               SizedBox(
-                height: 200,
+                height: size.height/2,
                 child: ListView.separated(itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: (){
                       setState(() {
                         selectedIndex = index;
+                      currentAnswer = widget.assignments![0].answers![index].correctAnswer;
                       });
                     },
                     child: Container(
@@ -124,7 +127,20 @@ class _QuestionScreenState extends State<QuestionScreen> {
               ),
               SizedBox(height: 16.h),
               DefaultAppButton(onTap: (){
-                navigateTo(context, DraggableExamScreen());
+                if(currentAnswer==1){
+                  navigateTo(context, DraggableExamScreen());
+                }else{
+                  HelperFunctions.showFlashBar(
+                      context: context,
+                      title: locale.error.toString(),
+                      message: "The answer is incorrect, please try again",
+                      icon: Icons.warning_amber,
+                      color: Color(0xffF6A9A9),
+                      titlcolor: Color(0xffD62E2E),
+                      iconColor: Color(0xffD62E2E)
+                  );
+                }
+
               }, height: 51.h, width: size.width, btnTitle: locale!.next),
             ],
           ),

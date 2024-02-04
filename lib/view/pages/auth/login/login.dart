@@ -178,7 +178,7 @@ class _LoginState extends State<Login> {
                               context,
                               MaterialPageRoute<void>(
                                   builder: (BuildContext context) =>
-                                      const HomeScreen()
+                                      const LayoutScreen()
                               ),
                               (route) => false);
                     }

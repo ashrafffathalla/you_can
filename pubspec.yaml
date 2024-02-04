@@ -54,7 +54,7 @@ dependencies:
   http: ^0.13.4
   font_awesome_flutter: ^9.2.0
   syncfusion_flutter_datepicker: ^20.2.43
-  flash: ^2.0.3+1
+  flash: ^3.0.0
   lottie: ^1.2.1
   carousel_slider: ^4.0.0
   get_it: ^7.2.0

@@ -10,6 +10,7 @@ class AutomationApi {
   static const forgetUrl = baseUrl + "/forget_password"; //post
   static const changePasswordUrl = baseUrl + "/change_password"; //post
   static const updateAllProfileUrl = baseUrl + "/update_profile"; //post
+  static const profileUrl = baseUrl + "/student/auth/profile"; //post
 
 //**************** LEVELS *******************//
   static const levels = baseUrl + "/student/api/levels"; //get
