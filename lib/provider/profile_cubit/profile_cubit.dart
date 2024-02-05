@@ -1,13 +1,10 @@
 import 'dart:math';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-
 import '../../data/model/profileModel.dart';
 import '../../repositories/auth_repositories/profileModel.dart';
 // import '../../data/model/deleteProfileModel.dart';
-
 part 'profile_state.dart';
-
 class ProfileCubit extends Cubit<ProfileState> {
   GetProfileRepository getProfileRepository;
   // DeleteAccountRepositories deleteAccountRepositories;
