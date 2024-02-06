@@ -13,11 +13,12 @@ class GetProfileRepository {
   Future<ProfileModel> getProfileData() async {
     try {
       final Response response = await dioHelper.getData(
-          url: AutomationApi.profileUrl, needAuth: true);
+          url: 'https://youcan-academy.com/public/api/v1/student/auth/profile',
+          needAuth: true);
       final data = jsonDecode(response.data) as Map<String, dynamic>;
       final ProfileModel profileListData = ProfileModel.fromJson(data);
       return profileListData;
-    } on DioError catch (dioError) {
+    } on DioException catch (dioError) {
       var error = jsonDecode(dioError.response!.data) as Map<String, dynamic>;
 
       throw error['message'];

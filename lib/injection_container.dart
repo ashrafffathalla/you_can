@@ -2,8 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:you_can/provider/auth_cubit/auth_cubit.dart';
 import 'package:you_can/provider/levelsCubit/levelsCubit.dart';
+import 'package:you_can/provider/profile_cubit/profile_cubit.dart';
 import 'package:you_can/repositories/auth_repositories/forget_pass_repositories.dart';
 import 'package:you_can/repositories/auth_repositories/login_repositories.dart';
+import 'package:you_can/repositories/auth_repositories/profileRepository.dart';
 import 'package:you_can/repositories/auth_repositories/sign_up_repositories.dart';
 import 'package:you_can/repositories/levelsRepositories/levels_repostories.dart';
 import 'core/constant/apis.dart';
@@ -21,38 +23,16 @@ Future<void> init() async {
       signUpRepositories: getIt(),
       forgetPassRepositories: getIt())
   );
+  getIt.registerFactory(() => ProfileCubit(getProfileRepository: getIt())
+
+
+  );
   getIt.registerFactory(() => AllLevelsCubit(
     repositories: getIt(),
-      )
+  )
   );
-  // getIt.registerFactory(() => RentCarCubit(
-  //       searchRepositories: getIt(),
-  //       getCarsRepositories: getIt(),
-  //       getCarsDetailsRepositories: getIt(),
-  //       getOrderDataRepositories: getIt(),
-  //       addOrderRepositories: getIt(),
-  //       checkOutRepositories: getIt(),
-  //       contractRepository: getIt(),
-  //     ));
-  // getIt.registerFactory(() => ProfileCubit(
-  //     getProfileRepository: getIt(),
-  //     deleteAccountRepositories: getIt(),
-  //     updateName: getIt(),
-  //     updateEmail: getIt(),
-  //     updatePhone: getIt(),
-  //     updatePassword: getIt(),
-  //   updateAllFields: getIt(),
-  // ));
-  //
-  // getIt.registerFactory(() => AddCardCubit(
-  //     addCardRepository: getIt(), getCreditCardRepository: getIt()));
-  // getIt.registerFactory(() => OrdersCubit(
-  //     getOrdersReopsitory: getIt(), getCarsChangeListRepositories: getIt()));
-  // getIt.registerFactory(() => QrCubit(qrRepository: getIt()));
-  // getIt.registerFactory(() => UnlockCarCubit(openCarRepositories: getIt()));
-  // getIt.registerFactory(() => ContractCubit(contractRepository: getIt()));
-  //
-  // // Repository
+
+  ///------------------------------------
   getIt.registerLazySingleton(
       () => LoginRepositories(dioHelper: getIt(), hiveHelper: getIt()));
   getIt.registerLazySingleton(
@@ -61,7 +41,7 @@ Future<void> init() async {
       () => SignUpRepositories(dioHelper: getIt(), hiveHelper: getIt()));
   getIt.registerLazySingleton(
       () => ForgetPassRepositories(dioHelper: getIt(), hiveHelper: getIt()));
-  // getIt.registerLazySingleton(() => GetProfileRepository(dioHelper: getIt()));
+  getIt.registerLazySingleton(() => GetProfileRepository(dioHelper: getIt()));
   // getIt.registerLazySingleton(() => DeleteAccountRepositories());
   // getIt.registerLazySingleton(() => UpdateName(dioHelper: getIt()));
   // getIt.registerLazySingleton(() => UpdateEmail(dioHelper: getIt()));

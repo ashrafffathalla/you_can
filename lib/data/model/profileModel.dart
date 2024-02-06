@@ -21,6 +21,7 @@ class Data {
   String? fullName;
   String? birthDate;
   String? phone;
+  String? gender;
   String? code;
   String? createdAt;
   String? updatedAt;
@@ -30,6 +31,7 @@ class Data {
         this.fullName,
         this.birthDate,
         this.phone,
+        this.gender,
         this.code,
         this.createdAt,
         this.updatedAt});
@@ -39,6 +41,7 @@ class Data {
     fullName = json['full_name'];
     birthDate = json['birth_date'];
     phone = json['phone'];
+    gender = json['gender'];
     code = json['code'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
@@ -50,6 +53,7 @@ class Data {
     data['full_name'] = this.fullName;
     data['birth_date'] = this.birthDate;
     data['phone'] = this.phone;
+    data['gender'] = this.gender;
     data['code'] = this.code;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;

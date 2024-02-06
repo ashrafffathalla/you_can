@@ -7,6 +7,7 @@ import 'package:you_can/language/locale.dart';
 import 'package:you_can/myobserver.dart';
 import 'package:you_can/provider/auth_cubit/auth_cubit.dart';
 import 'package:you_can/provider/levelsCubit/levelsCubit.dart';
+import 'package:you_can/provider/profile_cubit/profile_cubit.dart';
 import 'package:you_can/view/pages/auth/login/autth_view.dart';
 import 'package:you_can/view/pages/auth/on_boarding/on_boarding.dart';
 import 'package:you_can/view/pages/auth/sign_up/sign_up.dart';
@@ -60,6 +61,7 @@ class MyApp extends StatelessWidget {
           providers: [
             BlocProvider<AuthCubit>(create: (context) => getIt<AuthCubit>()),
             BlocProvider<LanguageCubit>(create: (context) => getIt<LanguageCubit>()),
+            BlocProvider<ProfileCubit>(create: (context) => getIt<ProfileCubit>()..getProfileData()),
             BlocProvider<AllLevelsCubit>(create: (context) => getIt<AllLevelsCubit>()..getAllLevels()),
 
           ],
