@@ -71,7 +71,7 @@ dependencies:
   hive_flutter: ^1.1.0
   flutter_screenutil: ^5.9.0
   flutter_tts: ^3.8.5
-
+  flutter_zoom_videosdk: ^1.7.0
 
 dev_dependencies:
   build_runner: ^2.1.5
@@ -105,9 +105,8 @@ flutter:
     - assets/images/
 
   fonts:
-      - family: Cairo
-        fonts:
-          - asset: fonts/Cairo-Regular.ttf
-          - asset: fonts/Cairo-Bold.ttf
-          - asset: fonts/Cairo-SemiBold.ttf
-
+    - family: Cairo
+      fonts:
+        - asset: fonts/Cairo-Regular.ttf
+        - asset: fonts/Cairo-Bold.ttf
+        - asset: fonts/Cairo-SemiBold.ttf

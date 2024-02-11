@@ -79,7 +79,8 @@ class MyApp extends StatelessWidget {
                 theme: lightTheme(),
                 themeMode: ThemeMode.system,
                  // home: ZoomMeetingPage(meetingLink:'https://us05web.zoom.us/j/86954694052?pwd=V6ForYywdaici6BLzyeaorxe1qDoai.1'),
-                 home: SplashScreen(),
+                 home:  ZoomVideoSdkProvider(),
+                 // home: SplashScreen(),
                 debugShowCheckedModeBanner: false,
               );
             },

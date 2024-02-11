@@ -39,7 +39,7 @@ class _ZoomMeetingPageState extends State<ZoomMeetingPage> {
       ..loadRequest(Uri.parse(widget.meetingLink.toString()));
     return Scaffold(
       appBar: AppBar(
-        title: Text('Zoom Meeting'),
+        title: Text('Zoom Meetings'),
       ),
       body:
       WillPopScope(
