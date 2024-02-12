@@ -10,6 +10,10 @@
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
 	<string>You Can</string>
+	<key>NSCameraUsageDescription</key>
+    <string>Need to use the camera for call</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Need to use the microphone for call</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>

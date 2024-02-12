@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:you_can/core/app_life_cycle_manager.dart';
 import 'package:you_can/language/locale.dart';
 import 'package:you_can/myobserver.dart';
 import 'package:you_can/provider/auth_cubit/auth_cubit.dart';
 import 'package:you_can/provider/levelsCubit/levelsCubit.dart';
 import 'package:you_can/provider/profile_cubit/profile_cubit.dart';
-import 'package:you_can/view/pages/auth/login/autth_view.dart';
-import 'package:you_can/view/pages/auth/on_boarding/on_boarding.dart';
+import 'package:flutter_zoom_sdk/zoom_view.dart';
+import 'package:flutter_zoom_sdk/zoom_options.dart';
 import 'package:you_can/view/pages/auth/sign_up/sign_up.dart';
 import 'package:you_can/view/pages/auth/welcomeScreen/selectAccountType.dart';
 import 'package:you_can/view/pages/auth/welcomeScreen/welcomAuth.dart';
@@ -21,6 +20,7 @@ import 'package:you_can/view/pages/splash_screen/splash_screen.dart';
 import 'core/localization/language_cubit.dart';
 import 'core/size_config/size_config.dart';
 import 'core/style/style.dart';
+
 import 'data/local/hiva_helper.dart';
 import 'injection_container.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -79,8 +79,8 @@ class MyApp extends StatelessWidget {
                 theme: lightTheme(),
                 themeMode: ThemeMode.system,
                  // home: ZoomMeetingPage(meetingLink:'https://us05web.zoom.us/j/86954694052?pwd=V6ForYywdaici6BLzyeaorxe1qDoai.1'),
-                 home:  ZoomVideoSdkProvider(),
-                 // home: SplashScreen(),
+                 // home:  ZoomVideoSdkProvider(),
+                 home: SplashScreen(),
                 debugShowCheckedModeBanner: false,
               );
             },

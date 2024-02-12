@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:you_can/core/constant/lang_code.dart';
-
 import '../../data/local/hiva_helper.dart';
-
 class LanguageCubit extends Cubit<Locale> {
   String ? currentLocal;
    HiveHelper? hiveHelper;
