@@ -170,7 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           itemBuilder: (context, index) {
                             return GestureDetector(
                                 onTap: () async{
-                                   cubit.getAllLessons(index);
+                                   cubit.getAllLessons(index+1);
                                    navigateTo(context, LessonsScreen(
                                     levelName: cubit.levelsModel!.data![index].name.toString(),
                                   ));

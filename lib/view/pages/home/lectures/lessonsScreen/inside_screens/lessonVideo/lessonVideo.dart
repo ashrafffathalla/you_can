@@ -165,7 +165,8 @@ class _LessonVideoScreenState extends State<LessonVideoScreen> {
                         tabs: [
                           Center(child: Text('Caption',style: TextStyle(fontWeight: FontWeight.w600,fontSize: 16.sp),)),
                           Center(child: Text('Comments',style: TextStyle(fontWeight: FontWeight.w600,fontSize: 16.sp),)),
-                          Center(child: FittedBox(child: GestureDetector( onTap: () {
+                          Center(child: FittedBox(child: GestureDetector(
+                              onTap: () {
                             navigateTo(context, QuestionScreen(assignments: widget.assignments,));
                           }, child: Text("Assignment",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 16.sp),)))),
 

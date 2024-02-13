@@ -65,8 +65,16 @@ class _QuestionScreenState extends State<QuestionScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          child: Column(
+        child: widget.assignments!.isEmpty?Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('There are currently no assignments available for this lesson',style: TextStyle(
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w600
+            ),),
+          ],
+        ): SingleChildScrollView(
+          child:Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(

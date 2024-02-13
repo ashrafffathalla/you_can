@@ -28,8 +28,10 @@ class _SplashScreenState extends State<SplashScreen>  with SingleTickerProviderS
 
     _animationController.forward();
     if (token != null) {
+      print("1111f");
       startWidget = const LayoutScreen();
     } else {
+      print("1111E");
       startWidget = const AuthView();
     }
     Future.delayed(

@@ -86,9 +86,10 @@ class _CommentsScreenState extends State<CommentsScreen> {
                     itemCount: 3),
               ),*/
               Column(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Container(
-                    height: MediaQuery.of(context).size.height*0.38,
+                    height: MediaQuery.of(context).size.height*0.32,
                     child: CommentBox(
                       userImage: CommentBox.commentImageParser(
                           imageURLorPath: "assets/images/person.png"),
@@ -98,7 +99,6 @@ class _CommentsScreenState extends State<CommentsScreen> {
                       withBorder: false,
                       sendButtonMethod: () {
                         if (formKey.currentState!.validate()) {
-
                           setState(() {
                             var value = {
                               'name': 'New User',

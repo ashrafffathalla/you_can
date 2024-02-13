@@ -35,12 +35,13 @@ class ListLevelsScreen extends StatelessWidget {
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w600),
                 ),
-                Text(subTitle,
-                  style: TextStyle(
-                      color: Color(0xff7D7D7D),
-                      fontSize: 13.sp,
-                      fontWeight: FontWeight.w500),
-                ),
+                // Text(
+                //   subTitle,
+                //   style: TextStyle(
+                //       color: Color(0xff7D7D7D),
+                //       fontSize: 13.sp,
+                //       fontWeight: FontWeight.w500),
+                // ),
               ],
             ),
             Spacer(),

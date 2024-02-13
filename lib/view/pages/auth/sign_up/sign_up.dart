@@ -5,6 +5,7 @@ import 'package:you_can/data/local/hiva_helper.dart';
 import 'package:you_can/provider/auth_cubit/auth_cubit.dart';
 import 'package:you_can/shared/shared_commponents/commponents.dart';
 import 'package:intl/intl.dart';
+import 'package:you_can/view/pages/auth/login/autth_view.dart';
 import 'package:you_can/view/pages/auth/otp/otp.dart';
 import 'package:you_can/view/pages/auth/sign_up/success_create_Account.dart';
 import 'package:you_can/view/widgets/custom_text_feild.dart';
@@ -161,8 +162,9 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
                       ),
                       actions: [
                         Center(child: DefaultAppButton(onTap: (){
-                          navigateTo(context, OTP(namePage: 'signUp'));
-                        }, height: 40.h, width: size.width*0.3, btnTitle: local!.verification.toString()))
+                          navigateTo(context, AuthView());
+                          // navigateTo(context, OTP(namePage: 'signUp'));
+                        }, height: 40.h, width: size.width*0.33, btnTitle: local!.verification.toString()))
                       ],
                     );
                   });
