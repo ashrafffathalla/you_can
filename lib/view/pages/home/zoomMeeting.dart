@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 class ZoomMeetingPage extends StatefulWidget {
   final dynamic meetingLink;
@@ -23,20 +24,28 @@ class _ZoomMeetingPageState extends State<ZoomMeetingPage> {
           onProgress: (int progress) {
             // Update loading bar.
           },
-          onPageStarted: (String url) {},
+          onPageStarted: (String url) {
+            if (widget.meetingLink.contains('zoom')) {
+              // Handle the Zoom URL here
+              // You can launch the Zoom app, or display a message to the user
+              _launchZoomMeeting(widget.meetingLink);
+              // Return NavigationDecision.prevent to prevent loading the URL in the WebView
+              // return NavigationDecision.prevent;
+            }
+          },
           onPageFinished: (String url) {},
           onWebResourceError: (WebResourceError error) {
-            print('HHH');
           },
           onNavigationRequest: (NavigationRequest request) {
-            //if (request.url.startsWith(widget.url.toString())) {
-            //   return NavigationDecision.prevent;
-            // }
+            if (request.url.startsWith(Uri.parse(widget.meetingLink).toString())) {
+              return NavigationDecision.prevent;
+            }
             return NavigationDecision.navigate;
           },
         ),
       )
-      ..loadRequest(Uri.parse(widget.meetingLink.toString()));
+       ..loadRequest(Uri.parse('https://www.google.com'.toString())
+      );
     return Scaffold(
       appBar: AppBar(
         title: Text('Zoom Meetings'),
@@ -68,5 +77,13 @@ class _ZoomMeetingPageState extends State<ZoomMeetingPage> {
         ),
       ),
     );
+  }
+}
+Future<void> _launchZoomMeeting(url) async {
+  try {
+    print("FFFF");
+    await  launchUrl(Uri.parse(url));
+  } catch (e) {
+    print("Error launching the Zoom meeting URL: $e");
   }
 }

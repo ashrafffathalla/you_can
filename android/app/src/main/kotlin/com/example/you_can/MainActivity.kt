@@ -1,4 +1,4 @@
-package com.example.you_can
+package com.YC.you_can
 
 import io.flutter.embedding.android.FlutterActivity
 

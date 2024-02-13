@@ -7,8 +7,8 @@ import 'package:you_can/myobserver.dart';
 import 'package:you_can/provider/auth_cubit/auth_cubit.dart';
 import 'package:you_can/provider/levelsCubit/levelsCubit.dart';
 import 'package:you_can/provider/profile_cubit/profile_cubit.dart';
-import 'package:flutter_zoom_sdk/zoom_view.dart';
-import 'package:flutter_zoom_sdk/zoom_options.dart';
+// import 'package:flutter_zoom_sdk/zoom_view.dart';
+// import 'package:flutter_zoom_sdk/zoom_options.dart';
 import 'package:you_can/view/pages/auth/sign_up/sign_up.dart';
 import 'package:you_can/view/pages/auth/welcomeScreen/selectAccountType.dart';
 import 'package:you_can/view/pages/auth/welcomeScreen/welcomAuth.dart';
@@ -79,9 +79,8 @@ class MyApp extends StatelessWidget {
                 theme: lightTheme(),
                 themeMode: ThemeMode.system,
                  // home: ZoomMeetingPage(meetingLink:'https://us05web.zoom.us/j/86954694052?pwd=V6ForYywdaici6BLzyeaorxe1qDoai.1'),
-                 // home:  ZoomVideoSdkProvider(),
                  home: SplashScreen(),
-                debugShowCheckedModeBanner: false,
+                  debugShowCheckedModeBanner: false,
               );
             },
           ),
