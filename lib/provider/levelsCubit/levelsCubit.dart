@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:you_can/data/model/addcomments_model.dart';
 import 'package:you_can/provider/levelsCubit/levelsStates.dart';
 
 import '../../data/model/LevelsModel.dart';
@@ -35,6 +36,17 @@ class AllLevelsCubit extends Cubit<AllLevelsState> {
       emit(GetAllLessonsLoaded());
     } catch (e) {
       emit(GetAllLessonsError(error: e.toString()));
+    }
+  }
+
+  AddCommentsModel? commentsModel;
+  AddComment(id,body) async {
+    emit(AddCommentLoading());
+    try {
+      commentsModel = await repositories.addComments(id, body);
+      emit(AddCommentLoaded());
+    } catch (e) {
+      emit(AddCommentError(error: e.toString()));
     }
   }
 }

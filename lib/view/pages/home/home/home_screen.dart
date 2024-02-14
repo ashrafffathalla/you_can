@@ -205,7 +205,7 @@ Widget listOfLevels(locale,context,String levelName) => Container(
       child: Row(
         children: [
           Padding(
-            padding:  EdgeInsets.symmetric(horizontal: 10.w),
+            padding:  EdgeInsets.symmetric(horizontal: 20.w),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -217,7 +217,7 @@ Widget listOfLevels(locale,context,String levelName) => Container(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w600),
                 ),
-                Text(locale!.liveLectures.toString(), textAlign: TextAlign.start, style: TextStyle(color: Color(0xff7D7D7D), fontSize: 13.sp, fontWeight: FontWeight.w500),),
+                // Text(locale!.liveLectures.toString(), textAlign: TextAlign.start, style: TextStyle(color: Color(0xff7D7D7D), fontSize: 13.sp, fontWeight: FontWeight.w500),),
               ],
             ),
           ),

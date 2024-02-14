@@ -8,6 +8,7 @@ import 'package:you_can/language/locale.dart';
 import 'package:you_can/view/pages/home/home/home_screen.dart';
 import 'package:you_can/view/pages/home/practice/practice_screen.dart';
 import 'package:you_can/view/pages/home/sessions/sessions_screen.dart';
+import '../../../provider/profile_cubit/profile_cubit.dart';
 import 'exams/Exams_screen.dart.dart';
 import 'lectures/lectures_screen.dart';
 import 'myAccount/myaccount_screen.dart';
@@ -34,8 +35,8 @@ class _LayoutScreenState extends State<LayoutScreen> {
   late PersistentTabController _controller;
   @override
   void initState() {
-
     _controller = PersistentTabController(initialIndex: 0);
+    BlocProvider.of<ProfileCubit>(context).getProfileData();
     super.initState();
   }
 

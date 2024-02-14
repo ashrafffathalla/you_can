@@ -187,14 +187,15 @@ class Comments {
   int? id;
   Student? student;
   String? body;
-
-  Comments({this.id, this.student, this.body});
+  String? created_at;
+  Comments({this.id, this.student, this.body,this.created_at});
 
   Comments.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     student =
     json['student'] != null ? new Student.fromJson(json['student']) : null;
     body = json['body'];
+    created_at = json['created_at'];
   }
 
   Map<String, dynamic> toJson() {
@@ -204,6 +205,7 @@ class Comments {
       data['student'] = this.student!.toJson();
     }
     data['body'] = this.body;
+    data['created_at'] = this.created_at;
     return data;
   }
 }

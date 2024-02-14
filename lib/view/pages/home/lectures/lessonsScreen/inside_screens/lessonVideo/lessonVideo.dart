@@ -6,6 +6,7 @@ import 'package:video_player/video_player.dart';
 import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:you_can/data/model/lessonsByLevelModel.dart';
 import 'package:you_can/language/locale.dart';
+import 'package:you_can/provider/profile_cubit/profile_cubit.dart';
 import 'package:you_can/shared/shared_commponents/commponents.dart';
 import 'package:you_can/view/pages/home/layout.dart';
 import 'package:you_can/view/pages/home/lectures/lessonsScreen/inside_screens/lessonVideo/assignment.dart';
@@ -14,24 +15,11 @@ import 'package:you_can/view/pages/home/lectures/lessonsScreen/inside_screens/le
 import 'package:you_can/view/homeWork.dart';
 
 import '../../../../../../../provider/levelsCubit/levelsCubit.dart';
-/*
-  Shimmer.fromColors(
-                baseColor: Colors.grey[300]!,
-                highlightColor: Colors.grey[100]!,
-                child: Container(
-                  width: 292.w,
-                  height: 138.h,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(25.sp)),
-                ),
-              ),
- */
 
 class LessonVideoScreen extends StatefulWidget {
    LessonVideoScreen({super.key,this.assignments,this.caption,this.comments,this.lessonName,this.LessonNumber,this.teacher,this.video});
   String? lessonName;
-  String? LessonNumber;
+  dynamic LessonNumber;
   String? teacher ;
   String? caption;
   List? comments;
@@ -167,6 +155,7 @@ class _LessonVideoScreenState extends State<LessonVideoScreen> {
                           Center(child: Text('Comments',style: TextStyle(fontWeight: FontWeight.w600,fontSize: 16.sp),)),
                           Center(child: FittedBox(child: GestureDetector(
                               onTap: () {
+                                // print(BlocProvider.of<ProfileCubit>(context).profileListProfileData!.data!.phone.toString());
                             navigateTo(context, QuestionScreen(assignments: widget.assignments,));
                           }, child: Text("Assignment",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 16.sp),)))),
 
@@ -181,7 +170,7 @@ class _LessonVideoScreenState extends State<LessonVideoScreen> {
                       physics: NeverScrollableScrollPhysics(),
                       children: [
                         CaptionScreen(caption: widget.caption!),
-                        CommentsScreen(comments: widget.comments!),
+                        CommentsScreen(comments: widget.comments!,LessonId: widget.LessonNumber),
                         // QuestionScreen(assignments: widget.assignments,),
                         SizedBox()
                         // Container(),
