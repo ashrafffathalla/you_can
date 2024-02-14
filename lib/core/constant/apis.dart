@@ -20,6 +20,9 @@ class AutomationApi {
 
   static const addComment = baseUrl + "/student/api/comment/store";//post
 
+  //*********************Exams***********************//
+  static const exams = baseUrl + "/student/api/exams"; //get
+
 
 }
 

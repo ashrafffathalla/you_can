@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:you_can/language/locale.dart';
 import 'package:you_can/myobserver.dart';
 import 'package:you_can/provider/auth_cubit/auth_cubit.dart';
+import 'package:you_can/provider/exams_cubit/exams_cubit.dart';
 import 'package:you_can/provider/levelsCubit/levelsCubit.dart';
 import 'package:you_can/provider/profile_cubit/profile_cubit.dart';
 // import 'package:flutter_zoom_sdk/zoom_view.dart';
@@ -63,6 +64,7 @@ class MyApp extends StatelessWidget {
             BlocProvider<LanguageCubit>(create: (context) => getIt<LanguageCubit>()),
             BlocProvider<ProfileCubit>(create: (context) => getIt<ProfileCubit>()..getProfileData()),
             BlocProvider<AllLevelsCubit>(create: (context) => getIt<AllLevelsCubit>()..getAllLevels()),
+            BlocProvider<ExamsCubit>(create: (context) => getIt<ExamsCubit>()..getAllExams()),
 
           ],
           child: BlocBuilder<LanguageCubit, Locale>(

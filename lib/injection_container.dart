@@ -1,12 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:you_can/provider/auth_cubit/auth_cubit.dart';
+import 'package:you_can/provider/exams_cubit/exams_cubit.dart';
 import 'package:you_can/provider/levelsCubit/levelsCubit.dart';
 import 'package:you_can/provider/profile_cubit/profile_cubit.dart';
 import 'package:you_can/repositories/auth_repositories/forget_pass_repositories.dart';
 import 'package:you_can/repositories/auth_repositories/login_repositories.dart';
 import 'package:you_can/repositories/auth_repositories/profileRepository.dart';
 import 'package:you_can/repositories/auth_repositories/sign_up_repositories.dart';
+import 'package:you_can/repositories/examsRepositories/exam_repositories.dart';
 import 'package:you_can/repositories/levelsRepositories/levels_repostories.dart';
 import 'core/constant/apis.dart';
 import 'core/localization/language_cubit.dart';
@@ -31,6 +33,12 @@ Future<void> init() async {
     repositories: getIt(),
   )
   );
+  //------------------------
+  getIt.registerFactory(() => ExamsCubit(
+    repositories: getIt(),
+  )
+  );
+  //---------------------------------
 
   ///------------------------------------
   getIt.registerLazySingleton(
@@ -42,6 +50,8 @@ Future<void> init() async {
   getIt.registerLazySingleton(
       () => ForgetPassRepositories(dioHelper: getIt(), hiveHelper: getIt()));
   getIt.registerLazySingleton(() => GetProfileRepository(dioHelper: getIt()));
+  getIt.registerLazySingleton(
+          () => ExamsRepositories(dioHelper: getIt(), hiveHelper: getIt()));
   // getIt.registerLazySingleton(() => DeleteAccountRepositories());
   // getIt.registerLazySingleton(() => UpdateName(dioHelper: getIt()));
   // getIt.registerLazySingleton(() => UpdateEmail(dioHelper: getIt()));
