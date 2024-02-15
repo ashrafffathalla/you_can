@@ -36,14 +36,16 @@ class Data {
   String? name;
   String? description;
   bool? isActive;
+  int? isOpen;
 
-  Data({this.id, this.name, this.description, this.isActive});
+  Data({this.id, this.name, this.description, this.isActive, this.isOpen});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     description = json['description'];
     isActive = json['is_active'];
+    isOpen = json['is_open'];
   }
 
   Map<String, dynamic> toJson() {
@@ -52,6 +54,7 @@ class Data {
     data['name'] = this.name;
     data['description'] = this.description;
     data['is_active'] = this.isActive;
+    data['is_open'] = this.isOpen;
     return data;
   }
 }
@@ -59,8 +62,8 @@ class Data {
 class Links {
   String? first;
   String? last;
-  Null prev;
-  Null next;
+  Null? prev;
+  Null? next;
 
   Links({this.first, this.last, this.prev, this.next});
 

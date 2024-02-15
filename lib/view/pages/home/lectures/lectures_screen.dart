@@ -33,19 +33,20 @@ class LecturesScreen extends StatelessWidget {
                   navigateTo(context, LessonsScreen());
                 },
                 child: SizedBox(
-                  height: size.height/1,
+                  height: size.height,
                   child: ListView.separated(
                       physics:NeverScrollableScrollPhysics(),
                       scrollDirection: Axis.vertical,
                       itemBuilder: (context, index) {
                         return GestureDetector(
                             onTap: () async{
-                              cubit.getAllLessons(index);
+                              print(index.toString()+"HH");
+                              cubit.getAllLessons(index+1);
                               navigateTo(context, LessonsScreen(
                                 levelName: cubit.levelsModel!.data![index].name.toString(),
                               ));
                             },
-                            child: listOfLevels(locale,context,cubit.levelsModel!.data![index].name.toString()));
+                            child: listOfLevels(locale,context,cubit.levelsModel!.data![index].name.toString(),cubit.levelsModel!.data![index].isActive));
                       },
                       separatorBuilder: (context, index) {
                         return Divider(

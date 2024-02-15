@@ -6,6 +6,7 @@ import 'package:you_can/provider/levelsCubit/levelsStates.dart';
 
 import '../../data/model/LevelsModel.dart';
 import '../../data/model/allExamsModel.dart';
+import '../../data/model/examModel.dart';
 import '../../data/model/lessonsByLevelModel.dart';
 import '../../repositories/examsRepositories/exam_repositories.dart';
 import '../../repositories/levelsRepositories/levels_repostories.dart';
@@ -17,11 +18,11 @@ class ExamsCubit extends Cubit<ExamsState> {
   /// -------------------------------------------
   ///----------Get All Orders -----------------
   ///-------------------------------------
-  AllExamModel? examModel;
+  AllExamModel? allExamModel;
   getAllExams() async {
     emit(GetAllExamsLoading());
     try {
-      examModel = await repositories.allExamsRepositories();
+      allExamModel = await repositories.allExamsRepositories();
       emit(GetAllExamsLoaded());
     } catch (e) {
       emit(GetAllExamsError(error: e.toString()));
@@ -30,19 +31,28 @@ class ExamsCubit extends Cubit<ExamsState> {
 
 
   ///------------------------
-  ///--------Get Level Lessons----------
+  ///--------Get Exam question by id----------
   ///----------------------------
-  //
-  // LessonsByLevelModel? lessonsByLevelModel;
-  // getAllLessons(int id) async {
-  //   emit(GetAllLessonsLoading());
-  //   try {
-  //     lessonsByLevelModel = await repositories.allLessonsInLevelRepositories(id);
-  //     emit(GetAllLessonsLoaded());
-  //   } catch (e) {
-  //     emit(GetAllLessonsError(error: e.toString()));
-  //   }
-  // }
+
+  ExamQuestionsModel? examQuestionsModel;
+  geExamQuestion(int id) async {
+    emit(ExamQuestionLoading());
+    try {
+      examQuestionsModel = await repositories.ExamQuestionRepositories(id);
+      emit(ExamQuestionLoaded());
+    } catch (e) {
+      emit(ExamQuestionError(error: e.toString()));
+    }
+  }
+  Enrollment(int id) async {
+    emit(EnrollmentLoading());
+    try {
+      await repositories.enrollmentNextLevel(id);
+      emit(EnrollmentLoaded());
+    } catch (e) {
+      emit(EnrollmentError(error: e.toString()));
+    }
+  }
   //
   // AddCommentsModel? commentsModel;
   // AddComment(id,body) async {

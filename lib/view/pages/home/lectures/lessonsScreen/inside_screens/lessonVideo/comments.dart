@@ -25,7 +25,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
       'name': 'Chuks Okwuenu',
       'pic': 'assets/images/person.png',
       'message': 'I love to code',
-      'date': '2021-01-01 12:00:00'
+      'date': '2021-01-01 12:00:00',
     },
 
   ];

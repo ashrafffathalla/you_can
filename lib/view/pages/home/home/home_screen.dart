@@ -150,13 +150,13 @@ class _HomeScreenState extends State<HomeScreen> {
                               fontSize: 16.sp,
                               fontWeight: FontWeight.w700),
                         ),
-                        Text(
-                          locale.seeAll.toString(),
-                          style: TextStyle(
-                              color: Color(0xff007AFF),
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w700),
-                        ),
+                        // Text(
+                        //   locale.seeAll.toString(),
+                        //   style: TextStyle(
+                        //       color: Color(0xff007AFF),
+                        //       fontSize: 12.sp,
+                        //       fontWeight: FontWeight.w700),
+                        // ),
                       ],
                     ),
                     SizedBox(
@@ -171,18 +171,19 @@ class _HomeScreenState extends State<HomeScreen> {
                             return GestureDetector(
                                 onTap: () async{
                                    cubit.getAllLessons(index+1);
-                                   navigateTo(context, LessonsScreen(
+                                   cubit.levelsModel!.data![index].isOpen==1?navigateTo(context, LessonsScreen(
                                     levelName: cubit.levelsModel!.data![index].name.toString(),
-                                  ));
+                                  )):false;
                                 },
-                                child: listOfLevels(locale,context,cubit.levelsModel!.data![index].name.toString()));
+                                child: listOfLevels(locale,context,cubit.levelsModel!.data![index].name.toString(),cubit.levelsModel!.data![index].isOpen));
                           },
                           separatorBuilder: (context, index) {
                             return Divider(
                               color: Colors.transparent,
                             );
                           },
-                          itemCount: 5),
+                          itemCount: cubit.levelsModel!.data!.length,
+                      ),
                     )
                   ],
                 ),
@@ -195,7 +196,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
 
-Widget listOfLevels(locale,context,String levelName) => Container(
+Widget listOfLevels(locale,context,String levelName,dynamic isLock) => Container(
   decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(8),
       color: Colors.white
@@ -222,7 +223,10 @@ Widget listOfLevels(locale,context,String levelName) => Container(
             ),
           ),
           Spacer(),
-          SvgPicture.asset('assets/images/arrow.svg'),
+          Padding(
+            padding:  EdgeInsets.symmetric(horizontal: 10.0.w),
+            child: SvgPicture.asset(isLock==0?'assets/images/lock.svg':'assets/images/arrow.svg'),
+          ),
         ],
       ),
     );

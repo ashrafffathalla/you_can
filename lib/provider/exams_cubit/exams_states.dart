@@ -15,3 +15,19 @@ class GetAllExamsError extends ExamsState {
   @override
   List<Object> get props => [error];
 }
+class ExamQuestionLoading extends ExamsState {}
+class ExamQuestionLoaded extends ExamsState {}
+class ExamQuestionError extends ExamsState {
+  final String error;
+  const ExamQuestionError({required this.error});
+  @override
+  List<Object> get props => [error];
+}
+class EnrollmentLoading extends ExamsState {}
+class EnrollmentLoaded extends ExamsState {}
+class EnrollmentError extends ExamsState {
+  final String error;
+  const EnrollmentError({required this.error});
+  @override
+  List<Object> get props => [error];
+}
