@@ -5,6 +5,7 @@ import 'package:you_can/provider/levelsCubit/levelsStates.dart';
 
 import '../../data/model/LevelsModel.dart';
 import '../../data/model/lessonsByLevelModel.dart';
+import '../../data/model/onlineMeetingModel.dart';
 import '../../repositories/levelsRepositories/levels_repostories.dart';
 
 class AllLevelsCubit extends Cubit<AllLevelsState> {
@@ -49,4 +50,18 @@ class AllLevelsCubit extends Cubit<AllLevelsState> {
       emit(AddCommentError(error: e.toString()));
     }
   }
+
+///------------------------
+///--------Get online Lessons----------
+///----------------------------
+  OnlineMeeting? onlineMeeting;
+getOnlineLesson(id) async {
+  emit(GetOnlineLessonLoading());
+  try {
+    onlineMeeting = await repositories.getOnlineLesson(id);
+    emit(GetOnlineLessonLoaded());
+  } catch (e) {
+    emit(GetOnlineLessonError(error: e.toString()));
+  }
+}
 }

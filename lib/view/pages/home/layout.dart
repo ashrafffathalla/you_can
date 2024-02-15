@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:you_can/data/local/hiva_helper.dart';
 import 'package:you_can/language/locale.dart';
 import 'package:you_can/view/pages/home/home/home_screen.dart';
 import 'package:you_can/view/pages/home/practice/practice_screen.dart';

@@ -37,3 +37,13 @@ class AddCommentError extends AllLevelsState {
   @override
   List<Object> get props => [error];
 }
+
+class GetOnlineLessonLoading extends AllLevelsState {}
+
+class GetOnlineLessonLoaded extends AllLevelsState {}
+class GetOnlineLessonError extends AllLevelsState {
+  final String error;
+  const GetOnlineLessonError({required this.error});
+  @override
+  List<Object> get props => [error];
+}
