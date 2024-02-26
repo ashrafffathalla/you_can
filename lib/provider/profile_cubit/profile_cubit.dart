@@ -24,24 +24,6 @@ class ProfileCubit extends Cubit<ProfileState> {
       emit(ProfileError(error: e.toString()));
     }
   }
-  ///DELETE PROFILE
-
-  // dynamic code;
-  //
-  // Future<void> deleteProfile() async {
-  //   emit(DeleteProfileLoading());
-  //   try {
-  //     final DeleteProfileModel? deleteProfileModel =
-  //     await deleteAccountRepositories.deleteProfile();
-  //     code = deleteProfileModel!.data!.code.toString();
-  //     emit(DeleteProfileSuccess(deleteProfileModel));
-  //   } catch (error) {
-  //     emit(DeleteProfileFailed(error.toString()));
-  //   }
-  // }
-
-
-
 
 
 
@@ -50,26 +32,22 @@ class ProfileCubit extends Cubit<ProfileState> {
   ----------update All Fields-------
   ----------------------------------
    */
-// updateAllFieldsAccInfo({
-//   required dynamic name,
-//   required dynamic email,
-//   required dynamic phone,
-//   required dynamic image,
-//
-//
-// })async{
-//   try {
-//     await updateAllFields.updateAllFields(
-//         name: name,
-//         email: email,
-//         phone: phone,
-//       image: image,
-//     );
-//     emit(UpdateAllProfileLoaded());
-//
-//   } catch (e) {
-//     emit(UpdateProfileError(error: e.toString()));
-//   }
-// }
+updateAllFieldsAccInfo({
+  required dynamic name,
+  required dynamic password,
+
+
+})async{
+  try {
+    await getProfileRepository.updateAllFields(
+        name: name,
+      password:password,
+    );
+    emit(UpdateAllProfileLoaded());
+
+  } catch (e) {
+    emit(UpdateProfileError(error: e.toString()));
+  }
+}
 
 }

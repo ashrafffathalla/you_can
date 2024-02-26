@@ -26,4 +26,26 @@ class GetProfileRepository {
       throw '..Oops $error';
     }
   }
+
+  Future<Response> updateAllFields({
+    required dynamic name,
+    required dynamic password,
+
+  }) async {
+    try {
+      final Response response = await dioHelper.postData(
+          url: AutomationApi.updateAllProfileUrl,
+          data: {
+            "full_name": name,
+            "password": password,
+          },
+          needAuth: true);
+      return response;
+    } on DioError catch (dioError) {
+      var error = jsonDecode(dioError.response!.data) as Map<String, dynamic>;
+      throw error.toString();
+    } catch (error) {
+      throw '..Oops $error';
+    }
+  }
 }

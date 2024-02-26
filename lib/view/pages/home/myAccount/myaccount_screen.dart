@@ -7,6 +7,7 @@ import 'package:shimmer/shimmer.dart';
 import 'package:you_can/language/locale.dart';
 import 'package:you_can/provider/profile_cubit/profile_cubit.dart';
 import 'package:you_can/shared/shared_commponents/commponents.dart';
+import 'package:you_can/view/pages/home/myAccount/edit_account.dart';
 import 'package:you_can/view/pages/home/myAccount/exam_results_screen.dart';
 import 'package:you_can/view/pages/home/myAccount/paymentHistory_Screen.dart';
 import 'package:you_can/view/widgets/card_personalData.dart';
@@ -26,13 +27,18 @@ class MyAccountScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('My Account'),
         actions: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8.0),
-            child: Center(
-              child: Text(
-                'Edit',
-                style:
-                    TextStyle(color: Colors.blue, fontWeight: FontWeight.w700),
+          InkWell(
+            onTap: (){
+              navigateTo(context, AccountInfo());
+            },
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12.0.h),
+              child: Center(
+                child: Text(
+                  'Edit',
+                  style:
+                      TextStyle(color: Colors.blue, fontWeight: FontWeight.w700),
+                ),
               ),
             ),
           )

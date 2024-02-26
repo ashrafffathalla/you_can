@@ -27,8 +27,17 @@ class ExamsScreen extends StatelessWidget {
       ),
       body: BlocBuilder<ExamsCubit, ExamsState>(
         builder: (context, state) {
-          if (state is GetAllExamsLoading||cubit.allExamModel==null) {
+          if (state is GetAllExamsLoading) {
             return LoadingShimmerWidget();
+          }
+          if (state is GetAllExamsError) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+
+                Center(child: Text(state.error.toString()))
+              ],
+            );
           }
           return  SingleChildScrollView(
                   child: Column(

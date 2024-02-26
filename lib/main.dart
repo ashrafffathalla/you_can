@@ -48,8 +48,6 @@ void main() async{
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -65,7 +63,6 @@ class MyApp extends StatelessWidget {
             BlocProvider<ProfileCubit>(create: (context) => getIt<ProfileCubit>()..getProfileData()),
             BlocProvider<AllLevelsCubit>(create: (context) => getIt<AllLevelsCubit>()..getAllLevels()),
             BlocProvider<ExamsCubit>(create: (context) => getIt<ExamsCubit>()..getAllExams()),
-
           ],
           child: BlocBuilder<LanguageCubit, Locale>(
             builder: (_, locale) {
@@ -92,4 +89,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

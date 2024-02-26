@@ -112,7 +112,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                       height: size.height * 0.005,
                                     ),
                                     DefaultAppButton(
-                                        onTap: () {},
+                                        onTap: () {
+
+                                        },
                                         height: 36.h,
                                         width: 126.w,
                                         btnTitle: 'Invite'),
@@ -144,12 +146,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   SizedBox(
                     height: size.height * 0.02,
                   ),
-                  InkWell(
+                  cubit.onlineMeeting !=null?InkWell(
                       onTap: ()async {
                          await cubit.getOnlineLesson(cubit.levelsModel!.data![0].id);
                          navigateTo(context, ZoomMeetingPage(meetingLink: cubit.onlineMeeting!.data!.joinUrl.toString()));
                       },
-                      child: Image.asset('assets/images/video.png')),
+                      child: Image.asset('assets/images/video.png')):SizedBox(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -204,7 +206,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                       itemCount: cubit.levelsModel!.data!.length,
                     ),
-                  )
+                  ),
+                  SizedBox(height: size.height*0.1,)
                 ],
               ),
             ),
